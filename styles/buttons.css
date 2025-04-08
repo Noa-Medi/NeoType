@@ -1,0 +1,13 @@
+button {
+    background-color: transparent;
+    border: .2em solid var(--primery);
+    box-shadow: 0 0 .8em var(--primery), inset 0 0 .7em var(--primery);
+    color: var(--primery);
+    padding: .81em;
+    border-radius: .5em;
+    text-shadow: 0 0 .5em var(--primery);
+}
+
+.start-button {
+    font-size: 30px;
+}

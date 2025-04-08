@@ -1,0 +1,25 @@
+:root {
+    --color-background: hsl(314, 40%, 10%);
+    --color-surface-alt: #32152B;
+    --color-accent: hsl(180, 100%, 50%);
+    --color-on-surface: white;
+
+    --my-border: 2px solid var(--color-on-surface);
+    --my-text-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
+    --my-box-shadow: 0 0 .7em var(--color-accent), 0 0 .3em var(--color-accent), inset 0 0 .5em var(--color-accent);
+    --my-border-radius: .6em;
+    --my-basic-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
+    --my-icons-shadow: 0 0 .2em var(--color-accent);
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-background);
+    position: relative;
+}

@@ -5,11 +5,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/text.css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/buttons.css">
+    <link rel="stylesheet" href="styles/divider.css">
+    <link rel="stylesheet" href="styles/main-part/main-body.css">
+    <link rel="stylesheet" href="styles/main-part/main-title.css">
 </head>
 
 <body>
+    <nav>
+        <div class="sidebar-container">
+            <div class="sidebar-title-container">
+                <div class="sidebar-title">
+                    <div class="neo-part">Neo</div>
+                    <div class="to-do-part">To-do</div>
+                </div>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-categories">
+                    <div class="sidebar-item selected-category">
+                        <div class="icon-container"><img src="assets/icons/sun.png" alt="" class="category-icon"></div>
+                        <div class="category-name">My Day</div>
+                    </div>
+                    <div class="sidebar-item ">
+                        <div class="icon-container">
+                            <img src="assets/icons/star.png" alt="" class="category-icon">
+                        </div>
+                        <div class="category-name">Important</div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="icon-container">
+                            <img src="assets/icons/home.png" alt="" class="category-icon">
+                        </div>
+                        <div class="category-name">Tasks</div>
+                    </div>
+                    <div class="divider-container">
+                        <div class="half-divider"></div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="icon-container">
+                            <img src="assets/icons/hamburger-menu.png" alt="" class="category-icon">
+                        </div>
+                        <div class="category-name">Goals</div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="icon-container">
+                            <img src="assets/icons/hamburger-menu.png" alt="" class="category-icon">
+                        </div>
+                        <div class="category-name">Grocery list</div>
+                    </div>
 
+                </div>
+                <div class="sidebar-new-list-button">
+                    <div class="divider-container">
+                        <div class="divider"></div>
+                    </div>
+                    <div class="sidebar-item new-list-button-container">
+                        <div class="icon-container">
+                            <img src="assets/icons/add.png" alt="" class="category-icon">
+                        </div>
+                        <div class="category-name">New list</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="main-content-container">
+            <div class="main-content">
+                <div class="top-and-middel-part">
+                    <div class="title-container">
+                        <div class="title-text">My Day</div>
+                        <div class="title-date">Monday, 7.April</div>
+                    </div>
+
+                    <div class="to-do-list-container">
+                        <div class="to-do-container">
+                            <div class="to-do-flex-left">
+                                <div class="check-box-icon-container">
+                                    <img src="assets/icons/checklist-with-out-check-mark.png" alt=""
+                                        class="check-box-icon">
+                                </div>
+                                <div class="vertical-divider-container">
+                                    <div class="vertical-divider"></div>
+                                </div>
+                                <div class="to-do-text-container">
+                                    <div class="to-do-text">
+                                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="to-do-flex-right">
+                                <div class="star-icon-container">
+                                    <img src="assets/icons/star.png" alt="" class="star-icon">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-part"></div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
