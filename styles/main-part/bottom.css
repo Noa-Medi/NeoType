@@ -68,5 +68,14 @@
     text-overflow: ellipsis;
     /* optional: show ... for long text */
     white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.to-do-input-container {
+    flex: 1;
+    display: flex;
 
 }
