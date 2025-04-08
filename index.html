@@ -13,8 +13,11 @@
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/buttons.css">
     <link rel="stylesheet" href="styles/divider.css">
-    <link rel="stylesheet" href="styles/main-part/main-body.css">
-    <link rel="stylesheet" href="styles/main-part/main-title.css">
+    <link rel="stylesheet" href="styles/main-part/body.css">
+    <link rel="stylesheet" href="styles/main-part/header.css">
+    <link rel="stylesheet" href="styles/main-part/bottom.css">
+
+
 </head>
 
 <body>
@@ -76,14 +79,19 @@
             </div>
         </div>
     </nav>
+    <header>
+        <div class="title-container">
+            <div class="title-text">My Day</div>
+            <div class="title-date">Monday, 7.April</div>
+        </div>
+    </header>
     <main>
         <div class="main-content-container">
+
+
             <div class="main-content">
                 <div class="top-and-middel-part">
-                    <div class="title-container">
-                        <div class="title-text">My Day</div>
-                        <div class="title-date">Monday, 7.April</div>
-                    </div>
+
 
                     <div class="to-do-list-container">
                         <div class="to-do-container">
@@ -97,7 +105,7 @@
                                 </div>
                                 <div class="to-do-text-container">
                                     <div class="to-do-text">
-                                        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd
+                                        This is the First task
                                     </div>
                                 </div>
                             </div>
@@ -108,10 +116,106 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="to-do-container">
+                            <div class="to-do-flex-left">
+                                <div class="check-box-icon-container">
+                                    <img src="assets/icons/checklist-with-out-check-mark.png" alt=""
+                                        class="check-box-icon">
+                                </div>
+                                <div class="vertical-divider-container">
+                                    <div class="vertical-divider"></div>
+                                </div>
+                                <div class="to-do-text-container">
+                                    <div class="to-do-text">
+                                        This is the Second task
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="to-do-flex-right">
+                                <div class="star-icon-container">
+                                    <img src="assets/icons/star.png" alt="" class="star-icon">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="to-do-container">
+                            <div class="to-do-flex-left">
+                                <div class="check-box-icon-container">
+                                    <img src="assets/icons/checklist-with-out-check-mark.png" alt=""
+                                        class="check-box-icon">
+                                </div>
+                                <div class="vertical-divider-container">
+                                    <div class="vertical-divider"></div>
+                                </div>
+                                <div class="to-do-text-container">
+                                    <div class="to-do-text">
+                                        This is the third task
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="to-do-flex-right">
+                                <div class="star-icon-container">
+                                    <img src="assets/icons/star.png" alt="" class="star-icon">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="completed-container">
+                            <div class="arrow-icon-container">
+                                <img src="assets/icons/arrow-down-sign-to-navigate.png" alt=""
+                                    class="completed-arrow-icon">
+                            </div>
+                            <div class="completed-text">Completed</div>
+                        </div>
+                        <div class="to-do-container completed-to-do">
+                            <div class="to-do-flex-left">
+                                <div class="check-box-icon-container">
+                                    <img src="assets/icons/checklist.png" alt="" class="check-box-icon">
+                                </div>
+                                <div class="vertical-divider-container">
+                                    <div class="vertical-divider"></div>
+                                </div>
+                                <div class="to-do-text-container">
+                                    <div class="to-do-text">
+                                        This is the third task
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="to-do-flex-right">
+                                <div class="star-icon-container">
+                                    <img src="assets/icons/star.png" alt="" class="star-icon">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="bottom-part"></div>
+                <div class="bottom-part-container">
+                    <div class="bottom-part-content">
+                        <div class="to-do-add-button-container">
+                            <button class="to-do-add-button">
+                                <div class="to-do-add-button-icon-container">
+                                    <img src="assets/icons/add.png" alt="" class="to-do-add-button-icon">
+                            </button>
+                        </div>
+
+
+                        <div class="input-container">
+                            <div class="to-do-input"><input type="text" name="to-do-text" id=""></div>
+                            <div class="category-container">
+                                <div class="category-icon-container"><img src="assets/icons/home.png" alt=""
+                                        class="category-icon"></div>
+                                <div class="category-name">Tasks</div>
+                            </div>
+                            <div class="date-picker"><input type="date" name="" id=""></div>
+                            <div class="reminder-container"><img src="assets/icons/alarm-clock.png" alt=""
+                                    class="reminder-icon"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
     </main>
 </body>

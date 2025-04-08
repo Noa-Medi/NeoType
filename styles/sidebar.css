@@ -6,7 +6,7 @@
     top: 0;
     width: 12em;
     box-shadow: 0 0 12em rgba(0, 0, 0, 0.345);
-    z-index: 1;
+    z-index: 2;
 }
 
 .sidebar-content {
@@ -41,7 +41,7 @@
 .sidebar-categories {
     width: 100%;
     height: 10em;
-    z-index: 2;
+    z-index: 3;
 }
 
 .sidebar-item {
@@ -79,5 +79,5 @@
 
 .sidebar-new-list-button {
     background-color: var(--color-surface-alt);
-    z-index: 3;
+    z-index: 4;
 }

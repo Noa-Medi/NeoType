@@ -1,0 +1,182 @@
+.main-content-container {
+    position: absolute;
+    top: 5.2em;
+    bottom: 0;
+    right: 0;
+    left: 12em;
+    overflow-y: auto;
+}
+
+.main-content {
+    position: relative;
+    height: 100%;
+}
+
+.top-and-middel-part {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+
+.to-do-list-container {
+    height: calc(100vh - 8em);
+    margin: 2.5em 0.5em .5em .6em;
+    border: none;
+    overflow-y: auto;
+    padding: 0.5em 1em 1em 1em;
+
+    box-sizing: border-box;
+    /* padding-right: 20px; */
+    /* Give some space for the scrollbar */
+
+
+}
+
+/* Style for the scrollbar itself */
+.to-do-list-container::-webkit-scrollbar {
+    width: .35em;
+    height: .1em;
+    /* Make the scrollbar width wide enough to be visible */
+}
+
+/* Style for the thumb (the draggable part of the scrollbar) */
+.to-do-list-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-on-surface);
+    /* Gray color for the thumb */
+
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+/* Style for the track (background area of the scrollbar) */
+.to-do-list-container::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Light background for the track */
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+/* Optional: Adding hover effect to the thumb */
+.to-do-list-container::-webkit-scrollbar-thumb:hover {}
+
+.to-do-container {
+    margin: .4em 0;
+    border: var(--my-border);
+    border-radius: var(--my-border-radius);
+    box-shadow: var(--my-box-shadow);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    /* important to prevent weird wraps */
+    gap: 0.5em;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+.to-do-flex-left {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    /* THIS FIXES FLEX OVERFLOW */
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.check-box-icon-container {
+    margin: 0 .5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 2em;
+    filter: drop-shadow(var(--my-icons-shadow));
+    padding-top: .1em;
+
+}
+
+.check-box-icon {
+    width: 1em;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+
+.to-do-text-container {
+    padding-top: .05em;
+    width: 100%;
+    min-width: 0;
+
+}
+
+.to-do-text {
+    font-size: 15px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+
+.to-do-flex-right {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-icon-container {
+    margin: 0 .05em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 2em;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+.star-icon {
+    width: 1.2em;
+}
+
+.completed-container {
+    height: 1em;
+    width: 4.5em;
+    border: var(--my-border);
+    border-radius: var(--my-border-radius);
+    box-shadow: var(--my-box-shadow);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.arrow-icon-container {
+    padding-top: .1em;
+    display: flex;
+    align-items: center;
+}
+
+.completed-arrow-icon {
+    width: .55em;
+}
+
+.completed-text {
+
+    font-size: 12px;
+}
+
+.completed-to-do {
+    border: var(--my-completed-border);
+    box-shadow: var(--my-completed-box-shadow);
+}
+
+.completed-to-do .to-do-text {
+    color: var(--color-comp-on-surface);
+    text-shadow: var(--my-completed-text-shadow);
+    text-decoration: line-through;
+}

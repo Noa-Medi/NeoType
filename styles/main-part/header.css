@@ -1,0 +1,23 @@
+header {
+    position: fixed;
+    top: 0em;
+    left: 12em;
+    right: 0;
+    background-color: var(--color-background);
+    height: 7em;
+    z-index: 1;
+
+}
+
+.title-container {
+    padding: 3em 1em 0 1.5em;
+}
+
+.title-text {
+    font-size: 35px;
+}
+
+.title-date {
+    margin-left: .1em;
+    font-size: 18px;
+}
