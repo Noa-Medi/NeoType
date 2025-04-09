@@ -3,26 +3,26 @@
     min-width: 0;
     border: none;
     background-color: transparent;
-    color: transparent;
-    /* Hide the text */
+    color: var(--color-on-surface);
     font-size: 19px;
-    color: transparent;
-    text-shadow: none;
     box-sizing: border-box;
+    text-shadow: var(--my-text-shadow);
     padding: 0.6em 0.6em;
     overflow: visible;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    caret-color: black;
-    /* Show the caret */
-    overflow-x: auto;
+    position: relative;
+    text-indent: 0.6em;
+    text-overflow: inherit;
+    vertical-align: middle;
+    /* Add this line */
+
+
+
 }
 
 .to-do-input::placeholder {
     color: var(--color-on-surface);
     text-shadow: var(--my-text-shadow);
+    /* glow for placeholder */
     opacity: 1;
     background: none;
 }
@@ -30,6 +30,7 @@
 .to-do-input:focus {
     outline: none;
     box-shadow: none;
+    /* just in case */
     border: none;
 }
 
@@ -62,25 +63,4 @@ input::placeholder {
     min-width: 0;
     align-items: center;
     overflow: visible;
-}
-
-.input-wrapper {
-    position: relative;
-    display: inline-block;
-    height: 2.3em;
-}
-
-.fake-input {
-    padding: 0.6em 0.6em;
-    font-size: 19px;
-    color: var(--color-on-surface);
-    text-shadow: var(--my-text-shadow);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    pointer-events: none;
-    /* Prevent interaction with the fake input */
-    white-space: nowrap;
-    overflow: hidden;
 }
