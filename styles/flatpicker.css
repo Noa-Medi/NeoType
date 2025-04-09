@@ -1,0 +1,8 @@
+.flatpickr-calendar {
+    box-shadow: var(--my-box-shadow);
+    border: var(--my-border);
+    text-shadow: var(--my-light-text-shadow);
+    border-radius: 10px;
+    background-color: var(--color-surface-alt);
+    font-family: 'Segoe UI', sans-serif;
+}

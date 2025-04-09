@@ -25,10 +25,11 @@
 }
 
 .to-do-add-button-container {
+    margin-left: .2em;
     border: var(--my-border);
     border-radius: var(--my-border-radius);
     box-shadow: var(--my-box-shadow);
-    width: 3.8em;
+    width: 3.4em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,33 +50,55 @@
     filter: drop-shadow(var(--my-icons-shadow));
 }
 
+.to-do-add-button {
+    padding: 0;
+}
+
 .to-do-add-button-icon {
     width: 1.1em;
     filter: drop-shadow(var(--my-icons-shadow));
 }
 
-.input-container {
-    border: var(--my-border);
-    border-radius: var(--my-border-radius);
-    box-shadow: var(--my-box-shadow);
-    flex: 1;
-    /* margin: 0 5em 0 .2em; */
-
-    min-width: 0;
-    /* important in flex! allows shrinking */
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /* optional: show ... for long text */
-    white-space: nowrap;
+.input-category-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+}
+
+.buttons {
+    height: 2.3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 0;
+    flex-shrink: 0;
+    display: flex;
+    overflow: visible;
+    align-items: center;
+
 
 }
 
-.to-do-input-container {
-    flex: 1;
+.input-box-icon-container {
     display: flex;
+    align-items: center;
+    margin: 0 .2em;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
 
+.input-category-icon {
+    width: 1.1em;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+.input-box-icon {
+    width: 1.1em;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+.calender-icon {
+    margin: 0 .2em;
+}
+
+.reminder-icon {
+    margin: 0 .2em;
 }

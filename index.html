@@ -8,7 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/flatpicker.css">
     <link rel="stylesheet" href="styles/text.css">
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/buttons.css">
@@ -203,17 +206,31 @@
 
 
                         <div class="input-container">
+
                             <div class="to-do-input-container">
-                                <input type="text" name="to-do-text" placeholder="Add a task" class="to-do-input">
+                                <div class="input-wrapper">
+                                    <!-- Fake input div for displaying shadowed text -->
+                                    <div class="fake-input" id="fake-input"></div>
+                                    <!-- Real input field -->
+                                    <input type="text" name="to-do-text" placeholder="Add a task" class="to-do-input"
+                                        id="real-input">
+                                </div>
                             </div>
-                            <!-- <div class="category-container">
-                                <div class="category-icon-container"><img src="assets/icons/home.png" alt=""
-                                        class="category-icon"></div>
-                                <div class="category-name">Tasks</div>
+                            <div class="buttons">
+                                <div class="input-category-container">
+                                    <div class="input-box-icon-container">
+                                        <img src="assets/icons/home.png" alt=""
+                                            class="input-category-icon input-box-icon">
+                                    </div>
+                                    <div class="category-name">Tasks</div>
+                                </div>
+                                <div class="input-box-icon-container">
+                                    <img src="assets/icons/calendar.png" alt="" class="calender-icon input-box-icon">
+                                </div>
+                                <div class="input-box-icon-container">
+                                    <img src="assets/icons/alarm-clock.png" alt="" class="reminder-icon input-box-icon">
+                                </div>
                             </div>
-                            <div class="date-picker"><input type="date" name="" id=""></div>
-                            <div class="reminder-container"><img src="assets/icons/alarm-clock.png" alt=""
-                                    class="reminder-icon"></div> -->
                         </div>
                     </div>
                 </div>
@@ -221,6 +238,9 @@
         </div>
         </div>
     </main>
+    <script src="script.js">
+
+    </script>
 </body>
 
 </html>
