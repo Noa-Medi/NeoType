@@ -6,14 +6,19 @@
     --color-on-surface: white;
     --color-comp-on-surface: rgb(145, 145, 145);
 
+
     --my-border: 2px solid var(--color-on-surface);
     --my-completed-border: 2px solid var(--color-comp-on-surface);
+
     --my-text-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
     --my-light-text-shadow: 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
     --my-completed-text-shadow: 0 0 .8em var(--color-comp-accent), 0 0 .5em var(--color-comp-accent), 0 0 .2em var(--color-comp-accent);
+
     --my-box-shadow: 0 0 .7em var(--color-accent), 0 0 .3em var(--color-accent), inset 0 0 .5em var(--color-accent);
     --my-completed-box-shadow: 0 0 .7em var(--color-comp-accent), 0 0 .3em var(--color-comp-accent), inset 0 0 .5em var(--color-comp-accent);
+
     --my-border-radius: .6em;
+
     --my-basic-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
     --my-icons-shadow: 0 0 .2em var(--color-accent);
 }
