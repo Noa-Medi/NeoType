@@ -5,7 +5,9 @@
     right: 0;
     left: 12em;
     overflow-y: auto;
+    overflow-x: hidden;
 }
+
 
 .main-content {
     position: relative;
@@ -23,7 +25,7 @@
 
 
 .to-do-list-container {
-    height: calc(100vh - 8em);
+    height: calc(100vh - 13em);
     margin: 2.5em 0.5em .5em .6em;
     border: none;
     overflow-y: auto;

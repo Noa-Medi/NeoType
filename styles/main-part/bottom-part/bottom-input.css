@@ -1,0 +1,161 @@
+.input-container {
+    border: var(--my-border);
+    border-radius: var(--my-border-radius);
+    box-shadow: var(--my-box-shadow);
+    flex: 1;
+    margin: 0 0em 0 .3em;
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.3em;
+    position: relative;
+}
+
+.input-container:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background-color: var(--color-accent);
+    border-radius: var(--my-border-radius);
+    border: var(--my-border);
+    opacity: 0;
+    outline: none;
+    z-index: 0;
+}
+
+
+.input-container:hover:before,
+.input-container:focus:before {
+    opacity: 1;
+    box-shadow: var(--my-focused-box-shadow);
+}
+
+.input-container:has(input:focus)::before {
+    opacity: 1;
+    box-shadow: var(--my-focused-box-shadow);
+}
+
+.input-container:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    transform: translate(0, 2.66em) perspective(1.2em) rotateX(20deg) scale(1.1, 0.4);
+    background-color: var(--color-accent);
+    filter: blur(1.5em);
+    opacity: 0.6;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.input-container:hover:after,
+.input-container:has(input:focus)::after {
+    opacity: 1;
+    overflow: hidden;
+    transition: opacity .2s ease-in-out;
+}
+
+
+
+
+
+.to-do-input-container {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
+    overflow: visible;
+}
+
+.to-do-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--color-on-surface);
+    font-size: 19px;
+    box-sizing: border-box;
+    text-shadow: var(--my-text-shadow);
+    padding: 0.6em 0.6em;
+    overflow: visible;
+    position: relative;
+    text-indent: 0.6em;
+    text-overflow: inherit;
+    vertical-align: middle;
+    /* Add this line */
+}
+
+
+
+.to-do-input::placeholder {
+    color: var(--color-on-surface);
+    text-shadow: var(--my-text-shadow);
+    /* glow for placeholder */
+    opacity: 1;
+    background: none;
+}
+
+.to-do-input:focus {
+    outline: none;
+    box-shadow: none;
+    /* just in case */
+    border: none;
+}
+
+/* make sure wrapper doesn't clip */
+input,
+.to-do-input,
+input::placeholder {
+    overflow: visible;
+}
+
+
+
+/* On Focus change color  */
+
+.input-container:focus-within .category-name,
+.input-container:focus-within .to-do-input,
+.input-container:focus-within .to-do-input::placeholder {
+    color: var(--color-background);
+    text-shadow: none;
+}
+
+.input-container:focus-within .input-box-icon {
+    filter: brightness(0) saturate(100%) invert(6.5%) sepia(80%) saturate(800%) hue-rotate(265deg);
+}
+
+.input-container:focus-within .input-box-icon-container {
+    filter: none;
+}
+
+/* On Hover change color  */
+
+.input-container:hover .category-name,
+.input-container:hover .to-do-input,
+.input-container:hover .to-do-input::placeholder {
+    color: var(--color-background);
+    text-shadow: none;
+}
+
+.to-do-input-container,
+.buttons {
+    position: relative;
+    z-index: 1;
+}
+
+.input-container:hover .input-box-icon {
+    filter: brightness(0) saturate(100%) invert(6.5%) sepia(80%) saturate(800%) hue-rotate(265deg);
+}
+
+.input-container:hover .input-box-icon-container {
+    filter: none;
+}
