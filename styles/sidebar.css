@@ -45,11 +45,20 @@
 }
 
 .sidebar-item {
+    cursor: pointer;
     display: flex;
     align-items: center;
     height: 2em;
     margin: .2em 13px;
+    border: var(--my-empty-border);
+    border-radius: var(--my-border-radius)
+}
 
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: var(--my-border);
+    border-color: var(--color-background);
+    /* box-shadow: var(--my-box-shadow); */
 }
 
 

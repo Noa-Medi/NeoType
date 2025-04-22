@@ -8,6 +8,7 @@
 
 
     --my-border: 2px solid var(--color-on-surface);
+    --my-empty-border: 2px solid transparent;
     --my-completed-border: 2px solid var(--color-comp-on-surface);
 
     --my-text-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
