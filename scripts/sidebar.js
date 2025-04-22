@@ -114,5 +114,5 @@ export function newList() {
 function lastCategorySelector() {
     let sidebar_categories_elem = document.querySelector('.sidebar-categories');
 
-
+    sidebar_categories_elem.lastChild.classList.add('selected-category')
 }
