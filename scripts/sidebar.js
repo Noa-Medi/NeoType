@@ -19,19 +19,25 @@ export function categoryClickEvent() {
 
     let sidebar_pages_Elems = document.querySelectorAll('.sidebar-item');
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('initialzed')
+        sidebar_pages_Elems.forEach((pageElem) => {
+            pageElem.addEventListener('click', (event) => {
 
-        console.log(sidebar_pages_Elems.length);
-        sidebar_pages_Elems.forEach((pagesElem) => {
-            pagesElem.addEventListener('click', (event) => {
 
                 sidebar_pages_Elems.forEach((elem) => {
                     elem.classList.remove('selected-category');
-                    pagesElem.classList.add('selected-category')
                 })
-
+                pageElem.classList.add('selected-category');
+                const category = pageElem.dataset.category;
+                window.location.hash = category;
             });
         });
 
     });
+
+    // Handle initial load or hash change
+    window.addEventListener('hashchange', () => {
+        const category = window.location.hash.substring(1);
+        todoPageRender(category); // You define this function
+    });
 }
+

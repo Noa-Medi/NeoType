@@ -40,11 +40,43 @@
 
 .sidebar-categories {
     width: 100%;
-    height: 10em;
+    height: 100%;
     z-index: 3;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
-.sidebar-item {
+
+/* Style for the scrollbar itself */
+.sidebar-categories::-webkit-scrollbar {
+    width: .35em;
+    height: .1em;
+    /* Make the scrollbar width wide enough to be visible */
+}
+
+/* Style for the thumb (the draggable part of the scrollbar) */
+.sidebar-categories::-webkit-scrollbar-thumb {
+    background-color: var(--color-on-surface);
+    /* Gray color for the thumb */
+
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+/* Style for the track (background area of the scrollbar) */
+.sidebar-categories::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Light background for the track */
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+/* Optional: Adding hover effect to the thumb */
+.sidebar-categories::-webkit-scrollbar-thumb:hover {}
+
+
+.sidebar-item,
+.sidebar-item-add-btn {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -54,7 +86,8 @@
     border-radius: var(--my-border-radius)
 }
 
-.sidebar-item:hover {
+.sidebar-item:hover,
+.sidebar-item-add-btn:hover {
     background-color: rgba(255, 255, 255, 0.03);
     border: var(--my-border);
     border-color: var(--color-background);
