@@ -2,7 +2,7 @@ import { idGenerator } from "./idGenerator.js"
 
 // idGenerator()
 
-export let neo_todo_categories = [
+export let neo_todo_pre_made_categories = [
     {
         categoryName: 'My Day',
         categoryID: 'rmpfdcj',
@@ -29,3 +29,18 @@ export let neo_todo_categories = [
 
     }
 ];
+
+export let neo_todo_user_made_categories = [
+    {
+        categoryName: 'Goals',
+        categoryID: 'adsfefdcj',
+        todos: [],
+        categoryIcon: '../assets/icons/hamburger-menu.png'
+
+    }, {
+        categoryName: 'Grocery list',
+        categoryID: 'hergf5h',
+        todos: [],
+        categoryIcon: '../assets/icons/hamburger-menu.png'
+    },
+]

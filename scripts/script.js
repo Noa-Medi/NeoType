@@ -1,5 +1,7 @@
-import { sidebarCategoriesRender, categoryClickEvent } from "./sidebar.js";
+import { sidebarCategoriesRender, categoryClickEvent, newList } from "./sidebar.js";
 
 sidebarCategoriesRender()
 
 categoryClickEvent()
+
+newList()

@@ -1,0 +1,31 @@
+.new-list-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--color-on-surface);
+    font-size: 15px;
+    box-sizing: border-box;
+    text-shadow: var(--my-text-shadow);
+    padding: 0.6em 0.6em;
+    overflow: visible;
+    position: relative;
+    text-indent: 0.6em;
+    text-overflow: inherit;
+    vertical-align: middle;
+    /* Add this line */
+}
+
+.new-list-input:focus {
+    outline: none;
+}
+
+
+.new-list-input::placeholder {
+    color: var(--color-on-surface);
+    text-shadow: var(--my-text-shadow);
+    /* glow for placeholder */
+    opacity: 1;
+    background: none;
+    filter: brightness(0.7);
+}
