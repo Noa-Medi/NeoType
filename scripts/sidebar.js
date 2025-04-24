@@ -1,5 +1,8 @@
-import { neo_todo_pre_made_categories, neo_todo_user_made_categories } from './categories.js'
-import { idGenerator } from "./idGenerator.js"
+import { neo_todo_pre_made_categories, neo_todo_user_made_categories } from './categories.js';
+import { Category } from './models.js'
+import { idGenerator } from "./idGenerator.js";
+import { todoPageRender } from './todoPage.js'
+
 
 
 export function sidebarCategoriesRender() {
@@ -7,9 +10,9 @@ export function sidebarCategoriesRender() {
     let sidebar_categories_element = document.querySelector('.sidebar-categories')
     neo_todo_pre_made_categories.forEach((category) => {
         categoriesHTML += `
-    <div class="sidebar-item ${category.categoryName === 'My Day' ? 'selected-category' : ''}" data-category="${category.categoryName}" data-category-id="${category.categoryID}">
-                        <div class="icon-container"><img src="${category.categoryIcon}" alt="" class="category-icon"></div>
-                        <div class="category-name">${category.categoryName}</div>
+    <div class="sidebar-item ${category.name === 'My Day' ? 'selected-category' : ''}" data-category="${category.name}" data-category-id="${category.categoryID}">
+                        <div class="icon-container"><img src="${category.icon}" alt="" class="category-icon"></div>
+                        <div class="category-name">${category.name}</div>
                     </div>`;
     });
     categoriesHTML += `<div class="divider-container">
@@ -18,9 +21,9 @@ export function sidebarCategoriesRender() {
 
     neo_todo_user_made_categories.forEach((category) => {
         categoriesHTML += `
-                    <div class="sidebar-item " data-category="${category.categoryName}" data-category-id="${category.categoryID}">
-                                        <div class="icon-container"><img src="${category.categoryIcon}" alt="" class="category-icon"></div>
-                                        <div class="category-name">${category.categoryName}</div>
+                    <div class="sidebar-item " data-category="${category.name}" data-category-id="${category.categoryID}">
+                                        <div class="icon-container"><img src="${category.icon}" alt="" class="category-icon"></div>
+                                        <div class="category-name">${category.name}</div>
                                     </div>`;
     });
     sidebar_categories_element.innerHTML = categoriesHTML;
@@ -43,8 +46,8 @@ export function categoryClickEvent() {
     });
 
     window.addEventListener('hashchange', () => {
-        const category = window.location.hash.substring(1);
-        // todoPageRender(category);
+        const categoryName = decodeURIComponent(window.location.hash.substring(1));
+        todoPageRender(categoryName);
     });
 }
 function removeSelectionFromCategory() {
@@ -83,14 +86,9 @@ export function newList() {
         input.addEventListener('keydown', (event) => {
 
 
-            if (event.key === "Enter") {
-                let newCategory = {
-                    categoryName: input.value,
-                    categoryID: idGenerator(),
-                    todos: [],
-                    categoryIcon: '../assets/icons/hamburger-menu.png',
+            if (event.key === "Enter" && input.value) {
 
-                };
+                let newCategory = new Category(input.value, '../assets/icons/hamburger-menu.png')
                 neo_todo_user_made_categories.push(newCategory)
                 newListElement.classList.remove('new-list-inputer');
                 newListElement.innerHTML = `
@@ -99,12 +97,12 @@ export function newList() {
           </div>
           <div class="category-name">New list</div>`;
 
-                const category = newCategory.categoryName;
+                const category = newCategory.name;
                 window.location.hash = category;
-                sidebarCategoriesRender()
-                removeSelectionFromCategory()
-                lastCategorySelector()
-
+                sidebarCategoriesRender();
+                removeSelectionFromCategory();
+                lastCategorySelector();
+                todoPageRender(category);
             }
 
         });
@@ -113,6 +111,6 @@ export function newList() {
 
 function lastCategorySelector() {
     let sidebar_categories_elem = document.querySelector('.sidebar-categories');
-
-    sidebar_categories_elem.lastChild.classList.add('selected-category')
+    sidebar_categories_elem.lastChild.classList.add('selected-category');
 }
+

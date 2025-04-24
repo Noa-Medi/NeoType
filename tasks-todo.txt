@@ -1,0 +1,5 @@
+fixing the add task 
+complite and uncomplite the tasks
+fix the local storage  for the categories and the todos
+animation of the check box of the todo
+hover effect of the New List button 

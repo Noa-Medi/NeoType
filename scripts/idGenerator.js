@@ -1,5 +1,5 @@
 
 export function idGenerator() {
-    const id = Math.random().toString(34).slice(2, 9);
+    const id = Date.now().toString(36) + Math.random().toString(36).substring(2, 8);
     return id;
 }
