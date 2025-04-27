@@ -1,8 +1,237 @@
+/* Overall Calendar Styling */
 .flatpickr-calendar {
+    /* border-radius: 7px !important; */
     box-shadow: var(--my-box-shadow);
+    /* Custom box shadow */
     border: var(--my-border);
-    text-shadow: var(--my-light-text-shadow);
+    /* Custom border */
     border-radius: 10px;
+    color: var(--color-on-surface);
+    /* Text color on surface */
     background-color: var(--color-surface-alt);
+    /* Background color */
     font-family: 'Segoe UI', sans-serif;
+    /* Font */
+    transition: none !important;
+    animation: none !important;
+    transform: scale(0.85) !important;
+    /* Smaller scale */
+    transform-origin: top left !important;
+    font-size: 12px !important;
+    text-shadow: none !important;
+    /* Remove text shadow for calendar */
+}
+
+/* Remove arrows for bottom-facing calendar */
+.flatpickr-calendar.arrowBottom:before,
+.flatpickr-calendar.arrowBottom:after {
+    display: none;
+}
+
+
+/* Current Month Text */
+.flatpickr-current-month {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    color: var(--color-on-surface);
+    /* Set text color */
+    text-shadow: none;
+    /* Remove text shadow */
+}
+
+.flatpickr-month {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: var(--color-accent) !important;
+}
+
+
+.flatpickr-monthDropdown-months {
+    /* background-color: var(--color-background) !important; */
+    outline: none !important;
+    border: none !important;
+    appearance: none !important;
+    height: 100% !important;
+    /* padding-left: 30px !important; */
+    background-image: url('../assets/icons/arrow-down-purple.png') !important;
+    background-size: 10px !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    color: var(--color-surface-alt) !important;
+}
+
+.flatpickr-monthDropdown-months:hover {
+    background-color: var(--color-surface-alt) !important;
+    background-image: url('../assets/icons/arrow-down.png') !important;
+    outline: none !important;
+    border: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    color: var(--color-on-surface) !important;
+}
+
+.flatpickr-monthDropdown-months:active {
+    background-color: var(--color-surface-alt) !important;
+    outline: none !important;
+    border: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    color: var(--color-on-surface) !important;
+}
+
+.flatpickr-weekdays {
+    background-color: var(--color-accent) !important;
+    color: var(--color-surface-alt) !important;
+
+
+}
+
+.flatpickr-weekday {
+    color: var(--color-surface-alt) !important;
+    text-shadow: none !important;
+}
+
+
+
+/* Remove borders and shadows from month dropdown */
+.flatpickr-monthDropdown {
+    border: none !important;
+    background-color: var(--color-background) !important;
+}
+
+.flatpickr-day {
+    color: var(--color-on-surface) !important;
+    text-shadow: var(--my-text-shadow);
+}
+
+
+.flatpickr-day:hover {
+    background-color: transparent !important;
+    color: var(--color-on-surface) !important;
+    text-shadow: var(--my-text-shadow);
+}
+
+/* Selected Day */
+.flatpickr-day.selected {
+    background-color: var(--color-accent) !important;
+    color: var(--color-background) !important;
+}
+
+/* Styling for the Year Dropdown */
+.flatpickr-yearDropdown-months {
+    color: var(--color-on-surface);
+    /* Year dropdown text color */
+    background-color: var(--color-comp-accent);
+    /* Background color */
+    text-shadow: none !important;
+    /* Remove text shadow */
+}
+
+/* Hour and Minute Picker */
+.flatpickr-time {
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background-color: var(--color-surface-alt);
+    /* Darker background */
+    color: var(--color-on-surface);
+    /* Text color */
+}
+
+.flatpickr-time input {
+    background-color: var(--color-surface-alt);
+    /* Darker background */
+    color: var(--color-on-surface);
+    /* Text color */
+    border: none !important;
+    /* No borders on input */
+}
+
+/* Hour and Minute Hover */
+.flatpickr-time input:hover {
+    background-color: var(--color-comp-accent);
+    /* Lighter background color */
+    color: var(--color-on-surface);
+    /* Text color on hover */
+}
+
+/* Hide dropdown arrow */
+.flatpickr-calendar .flatpickr-monthDropdown-months:after {
+    display: none;
+}
+
+/* Remove borders on internal containers */
+.flatpickr-header,
+.flatpickr-footer {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Color for SVGs in calendar (Right Arrow, etc.) */
+.flatpickr-next-month,
+.flatpickr-prev-month {
+    fill: var(--color-surface-alt) !important;
+    /* SVG icons (arrows) should be white */
+}
+
+
+
+.numInput {
+    font-size: 22px !important;
+    text-shadow: none !important;
+    color: var(--color-surface-alt) !important;
+}
+
+.numInput.flatpickr-hour,
+.numInput.flatpickr-minute {
+    font-size: 22px !important;
+    text-shadow: var(--my-text-shadow) !important;
+    color: var(--color-on-surface) !important;
+}
+
+.numInput:hover {
+    background-color: var(--color-accent) !important;
+    color: var(--color-surface-alt) !important;
+}
+
+.numInput:focus {
+    background-color: var(--color-accent) !important;
+    color: var(--color-surface-alt) !important;
+}
+
+.flatpickr-time-separator {
+    padding: 0 8px;
+    color: var(--color-on-surface) !important;
+}
+
+
+.flatpickr-am-pm {
+    color: var(--color-on-surface) !important;
+    text-shadow: var(--my-text-shadow) !important;
+}
+
+.flatpickr-am-pm:hover {
+    background-color: var(--color-accent) !important;
+    color: var(--color-surface-alt) !important;
+}
+
+.flatpickr-am-pm:focus {
+    background-color: var(--color-accent) !important;
+    color: var(--color-surface-alt) !important;
+}
+
+.flatpickr-day.inRange {
+    background: none !important;
+    border: none;
+    box-shadow: -5px 0 0 var(--color-accent), 5px 0 0 var(--color-accent) !important;
+    color: var(--color-surface-alt) !important;
+    background-color: var(--color-accent) !important;
+}
+
+.flatpickr-day.selected {
+    border: none;
 }

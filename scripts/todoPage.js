@@ -1,15 +1,14 @@
 import {
     neo_todo_pre_made_categories, neo_todo_user_made_categories, todoCategoryFinder
 } from './categories.js';
-import { buttomPart } from './bottomBar.js'
+import { setupBottomPart } from './bottomBar.js'
 
 
 export function todoPageRender(categoryName) {
     titleText(categoryName);
     titleDate();
     todosRender(categoryName);
-
-    buttomPart(categoryName);
+    setupBottomPart(categoryName);
 
 }
 
@@ -32,73 +31,44 @@ function titleDate() {
 }
 
 export function todosRender(categoryName) {
-    const todosContElem = document.querySelector('.to-do-list-container');
-    let allTodosHTML = '';
+    const uncompletedTodosElem = document.querySelector('.uncompleted-todos');
+    const completedTodosElem = document.querySelector('.completed-todos');
+    const uncompletedHTML = [];
+    const completedHTML = [];
+
     const category = todoCategoryFinder(categoryName);
-    let isCompletedNeeded = true;
+    // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
     category.todos.forEach((todo) => {
-        if (todo.isCompleted === false) {
-            allTodosHTML += `
-            <div class="to-do-container">
-                            <div class="to-do-flex-left">
-                                <div class="check-box-icon-container">
-                                    <img src="assets/icons/checklist-with-out-check-mark.png" alt=""  
-                                        class="check-box-icon">
-                                </div>
-                                <div class="vertical-divider-container">
-                                    <div class="vertical-divider"></div>
-                                </div>
-                                <div class="to-do-text-container">
-                                    <div class="to-do-text">
-                                        ${todo.text}
-                                    </div>
-                                </div>
-                            </div>
+        const todoHTML = `
+        <div class="to-do-container ${todo.isCompleted ? 'completed-to-do' : ''}">
+            <div class="to-do-flex-left">
+                <div class="check-box-icon-container">
+                    <img src="assets/icons/${todo.isCompleted ? 'checklist' : 'checklist-with-out-check-mark'}.png" class="check-box-icon">
+                </div>
+                <div class="vertical-divider-container">
+                    <div class="vertical-divider"></div>
+                </div>
+                <div class="to-do-text-container">
+                    <div class="to-do-text">${todo.text}</div>
+                </div>
+            </div>
+            <div class="to-do-flex-right">
+                <div class="star-icon-container">
+                    <img src="assets/icons/star.png" class="star-icon">
+                </div>
+            </div>
+        </div>`;
 
-                            <div class="to-do-flex-right">
-                                <div class="star-icon-container">
-                                    <img src="assets/icons/star.png" alt="" class="star-icon">
-                                </div>
-                            </div>
-                        </div>`
-        } if (todo.isCompleted === true) {
-            if (isCompletedNeeded) {
-                isCompletedNeeded = false;
-                allTodosHTML += ` <div class="completed-container">
-                            <div class="arrow-icon-container">
-                                <img src="assets/icons/arrow-down-sign-to-navigate.png" alt=""
-                                    class="completed-arrow-icon">
-                            </div>
-                            <div class="completed-text">Completed</div>
-                        </div>`
-            }
-            allTodosHTML += `
-            <div class="to-do-container completed-to-do">
-                            <div class="to-do-flex-left">
-                                <div class="check-box-icon-container">
-                                    <img src="assets/icons/checklist.png" alt="" class="check-box-icon">
-                                </div>
-                                <div class="vertical-divider-container">
-                                    <div class="vertical-divider"></div>
-                                </div>
-                                <div class="to-do-text-container">
-                                    <div class="to-do-text">
-                                    ${todo.text}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="to-do-flex-right">
-                                <div class="star-icon-container">
-                                    <img src="assets/icons/star.png" alt="" class="star-icon">
-                                </div>
-                            </div>
-                        </div>`
+        if (todo.isCompleted) {
+            completedHTML.push(todoHTML);
+        } else {
+            uncompletedHTML.push(todoHTML);
         }
     });
+    uncompletedTodosElem.innerHTML = uncompletedHTML.join('');
+    completedTodosElem.innerHTML = completedHTML.join('');
 
-    todosContElem.innerHTML = allTodosHTML;
 }
 
 

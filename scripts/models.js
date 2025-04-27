@@ -2,12 +2,13 @@ import { idGenerator } from "./idGenerator.js"
 
 
 export class Todo {
-    constructor(text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null) {
+    constructor(text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null, timeStamp = Date.now()) {
         this.text = text;
         this.todo_id = todo_id;
         this.isCompleted = isCompleted;
         this.date = date;
         this.reminder = reminder;
+        this.timeStamp = timeStamp;
     }
 }
 

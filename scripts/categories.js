@@ -13,6 +13,7 @@ export let neo_todo_pre_made_categories = [
                 isCompleted: false,
                 date: null,
                 reminder: null,
+
             }, {
                 text: 'This is the Second task',
                 todo_id: 'oi23890erfh4',
