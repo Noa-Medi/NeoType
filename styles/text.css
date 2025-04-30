@@ -1,7 +1,0 @@
-* {
-    font-family: Tilt Neon;
-    color: var(--color-on-surface);
-    font-size: 19px;
-    text-shadow: var(--my-text-shadow);
-    /* text-shadow: 0 0 1em var(--color-accent), 0 0 .7em var(--color-accent), 0 0 .2em var(--color-accent); */
-}

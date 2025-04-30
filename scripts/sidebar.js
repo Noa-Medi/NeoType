@@ -1,7 +1,8 @@
 import { neo_todo_pre_made_categories, neo_todo_user_made_categories } from './categories.js';
-import { Category } from './models.js'
-import { idGenerator } from "./idGenerator.js";
-import { todoPageRender } from './todoPage.js'
+import { Category } from './models.js';
+import { idGenerator } from "./component/idGenerator.js";
+import { hashDecoder } from './component/hashDecoder.js';
+import { todoPageRender } from './todoPage.js';
 
 
 
@@ -10,7 +11,7 @@ export function sidebarCategoriesRender() {
     let sidebar_categories_element = document.querySelector('.sidebar-categories')
     neo_todo_pre_made_categories.forEach((category) => {
         categoriesHTML += `
-    <div class="sidebar-item ${category.name === 'My Day' ? 'selected-category' : ''}" data-category="${category.name}" data-category-id="${category.categoryID}">
+    <div class="sidebar-item ${category.name === hashDecoder(window.location.hash) ? 'selected-category' : ''}" data-category="${category.name}" data-category-id="${category.categoryID}">
                         <div class="icon-container"><img src="${category.icon}" alt="" class="category-icon"></div>
                         <div class="category-name">${category.name}</div>
                     </div>`;
@@ -46,7 +47,7 @@ export function categoryClickEvent() {
     });
 
     window.addEventListener('hashchange', () => {
-        const categoryName = decodeURIComponent(window.location.hash.substring(1));
+        const categoryName = hashDecoder(window.location.hash);
         todoPageRender(categoryName);
     });
 }

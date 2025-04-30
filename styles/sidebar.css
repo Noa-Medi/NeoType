@@ -91,7 +91,7 @@
 .sidebar-item-add-btn:hover {
     background-color: rgba(255, 255, 255, 0.03);
     border: var(--my-border);
-    border-color: var(--color-background);
+    border-color: var(--color-on-surface);
     /* box-shadow: var(--my-box-shadow); */
 }
 

@@ -39,7 +39,8 @@
     margin: .1em 0;
     background-color: white;
     color: white;
-    height: 1em;
+    /* height: 1em; */
+    height: 100%;
     width: 1px;
 
     border-radius: 5px;

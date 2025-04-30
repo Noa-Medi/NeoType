@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/flatpicker.css">
-    <link rel="stylesheet" href="styles/text.css">
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/buttons.css">
     <link rel="stylesheet" href="styles/divider.css">
@@ -21,6 +20,7 @@
     <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-button.css">
     <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-main.css">
     <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-input.css">
+    <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-overley.css">
     <link rel="stylesheet" href="styles/sidebar-input.css">
 
 </head>
@@ -36,7 +36,7 @@
             </div>
             <div class="sidebar-content">
                 <div class="sidebar-categories">
-                    <div class="sidebar-item selected-category">
+                    <div class="sidebar-item ">
                         <div class="icon-container"><img src="assets/icons/sun.png" alt="" class="category-icon"></div>
                         <div class="category-name">My Day</div>
                     </div>
@@ -52,21 +52,7 @@
                         </div>
                         <div class="category-name">Tasks</div>
                     </div>
-                    <div class="divider-container">
-                        <div class="half-divider"></div>
-                    </div>
-                    <div class="sidebar-item">
-                        <div class="icon-container">
-                            <img src="assets/icons/hamburger-menu.png" alt="" class="category-icon">
-                        </div>
-                        <div class="category-name">Goals</div>
-                    </div>
-                    <div class="sidebar-item">
-                        <div class="icon-container">
-                            <img src="assets/icons/hamburger-menu.png" alt="" class="category-icon">
-                        </div>
-                        <div class="category-name">Grocery list</div>
-                    </div>
+
 
                 </div>
                 <div class="sidebar-new-list-button">
@@ -100,104 +86,12 @@
 
                     <div class="to-do-list-container">
                         <div class="uncompleted-todos">
-                            <div class="to-do-container">
-                                <div class="to-do-flex-left">
-                                    <div class="check-box-icon-container">
-                                        <img src="assets/icons/checklist-with-out-check-mark.png" alt=""
-                                            class="check-box-icon">
-                                    </div>
-                                    <div class="vertical-divider-container">
-                                        <div class="vertical-divider"></div>
-                                    </div>
-                                    <div class="to-do-text-container">
-                                        <div class="to-do-text">
-                                            This is the First task
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="to-do-flex-right">
-                                    <div class="star-icon-container">
-                                        <img src="assets/icons/star.png" alt="" class="star-icon">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="to-do-container">
-                                <div class="to-do-flex-left">
-                                    <div class="check-box-icon-container">
-                                        <img src="assets/icons/checklist-with-out-check-mark.png" alt=""
-                                            class="check-box-icon">
-                                    </div>
-                                    <div class="vertical-divider-container">
-                                        <div class="vertical-divider"></div>
-                                    </div>
-                                    <div class="to-do-text-container">
-                                        <div class="to-do-text">
-                                            This is the Second task
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="to-do-flex-right">
-                                    <div class="star-icon-container">
-                                        <img src="assets/icons/star.png" alt="" class="star-icon">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="to-do-container">
-                                <div class="to-do-flex-left">
-                                    <div class="check-box-icon-container">
-                                        <img src="assets/icons/checklist-with-out-check-mark.png" alt=""
-                                            class="check-box-icon">
-                                    </div>
-                                    <div class="vertical-divider-container">
-                                        <div class="vertical-divider"></div>
-                                    </div>
-                                    <div class="to-do-text-container">
-                                        <div class="to-do-text">
-                                            This is the third task
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="to-do-flex-right">
-                                    <div class="star-icon-container">
-                                        <img src="assets/icons/star.png" alt="" class="star-icon">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        <div class="completed-container">
-                            <div class="arrow-icon-container">
-                                <img src="assets/icons/arrow-down-sign-to-navigate.png" alt=""
-                                    class="completed-arrow-icon">
-                            </div>
-                            <div class="completed-text">Completed</div>
-                        </div>
+
 
                         <div class="completed-todos">
-                            <div class="to-do-container completed-to-do">
-                                <div class="to-do-flex-left">
-                                    <div class="check-box-icon-container">
-                                        <img src="assets/icons/checklist.png" alt="" class="check-box-icon">
-                                    </div>
-                                    <div class="vertical-divider-container">
-                                        <div class="vertical-divider"></div>
-                                    </div>
-                                    <div class="to-do-text-container">
-                                        <div class="to-do-text">
-                                            This is the Third task
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="to-do-flex-right">
-                                    <div class="star-icon-container">
-                                        <img src="assets/icons/star.png" alt="" class="star-icon">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -223,27 +117,61 @@
                                         <img src="assets/icons/home.png" alt=""
                                             class="input-category-icon input-box-icon">
                                     </div>
-                                    <div class="category-name">Tasks</div>
+                                    <div class="category-name category-name-js">Tasks</div>
+
+                                    <div class="choose-category-overlay-container">
+                                        <div class="overley-categories-list">
+                                            <div class="overley-category-and-icon-container">
+                                                <div class="overley-category-icon-container icon-container">
+                                                    <img src="assets/icons/home.png" alt=""
+                                                        class="overley-category-icon ">
+                                                </div>
+                                                <div class="overley-category-name">Tasks</div>
+                                            </div>
+
+                                            <div class="overley-category-and-icon-container">
+                                                <div class="overley-category-icon-container icon-container">
+                                                    <img src="assets/icons/hamburger-menu.png" alt=""
+                                                        class="overley-category-icon ">
+                                                </div>
+                                                <div class="overley-category-name">Goals</div>
+                                            </div>
+                                            <div class="overley-category-and-icon-container">
+                                                <div class="overley-category-icon-container icon-container">
+                                                    <img src="assets/icons/hamburger-menu.png" alt=""
+                                                        class="overley-category-icon ">
+                                                </div>
+                                                <div class="overley-category-name">Grocery list</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="input-box-icon-container calendar-picker-js">
                                     <input type="text" id="calendar-picker" style="display: none;" />
                                     <img src="assets/icons/calendar.png" alt="" class="calender-icon input-box-icon">
+
                                 </div>
+                                <div class="calendar-picked-date-text text-inside-input"></div>
+                                <div class="calendar-position-linker"></div>
                                 <div class="input-box-icon-container reminder-picker-js">
                                     <input type="text" id="reminder-picker" style="display: none;" />
                                     <img src="assets/icons/alarm-clock.png" alt="" class="reminder-icon input-box-icon">
+
                                 </div>
+                                <div class="reminder-picked-date-text text-inside-input"></div>
+                                <div class="reminder-position-linker"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+
     </main>
     <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script type="module" src="scripts/script.js">
+    <script type="module" src="scripts/script.js" defer>
     </script>
 </body>
 

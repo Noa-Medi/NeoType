@@ -32,6 +32,12 @@ export let neo_todo_pre_made_categories = [
                 isCompleted: true,
                 date: null,
                 reminder: null,
+            }, {
+                text: 'This is the Fifth task',
+                todo_id: 'ajw983jfasdfewse3',
+                isCompleted: true,
+                date: null,
+                reminder: null,
             },
         ],
         categoryIcon: '../assets/icons/sun.png',
@@ -99,7 +105,14 @@ export function todoCategoryFinder(categoryName) {
     }
     if (category) {
         return category;
+    } else {
+        return null;
     }
 
-    return category;
+
+}
+
+export function todoFinder(categoryName, todoId) {
+    const todo = todoCategoryFinder(categoryName).findTodoById(todoId);
+    return todo;
 }

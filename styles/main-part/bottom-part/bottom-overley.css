@@ -1,0 +1,94 @@
+.category-inputer {
+    position: relative;
+}
+
+
+.choose-category-overlay-container {
+    /* top: -5.6em;
+    left: -6em; */
+    bottom: 2.7em;
+    left: -6em;
+    position: absolute;
+    display: block;
+    /* justify-content: center; */
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 10;
+    background-color: var(--color-background);
+    border: var(--my-border);
+    border-radius: var(--my-border-radius);
+    box-shadow: var(--my-box-shadow);
+    height: auto;
+    max-height: 10em;
+    width: 10em;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+
+}
+
+/* Style for the scrollbar itself */
+.choose-category-overlay-container::-webkit-scrollbar {
+    width: .35em;
+    height: .1em;
+
+    /* Make the scrollbar width wide enough to be visible */
+}
+
+/* Style for the thumb (the draggable part of the scrollbar) */
+.choose-category-overlay-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-on-surface);
+    /* Gray color for the thumb */
+
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+/* Style for the track (background area of the scrollbar) */
+.choose-category-overlay-container::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Light background for the track */
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+.overley-categories-list {
+    display: grid;
+    grid-column: 1;
+    row-gap: .2em;
+    width: 100%;
+    padding: 0;
+    margin: .2em 0;
+}
+
+.overley-category-and-icon-container {
+    cursor: pointer;
+    display: flex;
+    padding: 0 .3em;
+    margin: 0 .1em;
+    border: var(--my-empty-border);
+    /* margin-bottom: .4em; */
+}
+
+.overley-category-and-icon-container:hover {
+    border: var(--my-border);
+    border-radius: var(--my-before-border-radius);
+}
+
+.overley-category-icon-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 .6em 0 0;
+}
+
+
+.overley-category-name {
+    display: inline-block;
+}
+
+.overley-category-icon {
+    object-fit: cover;
+}

@@ -1,4 +1,4 @@
-import { idGenerator } from "./idGenerator.js"
+import { idGenerator } from "./component/idGenerator.js"
 
 
 export class Todo {

@@ -1,5 +1,12 @@
-fixing the add task 
-complite and uncomplite the tasks
-fix the local storage  for the categories and the todos
-animation of the check box of the todo
-hover effect of the New List button 
+TODO: complite and uncomplite the tasks
+
+TODO: fix the category chooose in input container
+
+TODO: animation of the check box of the todo
+
+TODO: new-list-button-container must to have the click event to push the new category in memory
+
+TODO: fix the local storage  for the categories and the todos
+
+
+TODO: hover effect of the New List button 

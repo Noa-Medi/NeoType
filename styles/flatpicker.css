@@ -19,6 +19,7 @@
     transform-origin: top left !important;
     font-size: 12px !important;
     text-shadow: none !important;
+    transition: opacity 0.1s ease-in-out !important;
     /* Remove text shadow for calendar */
 }
 
@@ -52,6 +53,8 @@
 .flatpickr-monthDropdown-months {
     /* background-color: var(--color-background) !important; */
     outline: none !important;
+    font-family: var(--my-font-family) !important;
+    font-size: 22px !important;
     border: none !important;
     appearance: none !important;
     height: 100% !important;
@@ -65,6 +68,14 @@
     color: var(--color-surface-alt) !important;
 }
 
+.flatpickr-monthDropdown-months.open,
+.flatpickr-monthDropdown-months:focus,
+.flatpickr-monthDropdown-months:hover {
+    background-color: var(--color-surface-alt) !important;
+    color: var(--color-on-surface) !important;
+}
+
+
 .flatpickr-monthDropdown-months:hover {
     background-color: var(--color-surface-alt) !important;
     background-image: url('../assets/icons/arrow-down.png') !important;
@@ -73,6 +84,11 @@
     text-shadow: none !important;
     box-shadow: none !important;
     color: var(--color-on-surface) !important;
+}
+
+.flatpickr-monthDropdown-months option {
+    font-size: 14px;
+    background-color: var(--color-surface-alt);
 }
 
 .flatpickr-monthDropdown-months:active {

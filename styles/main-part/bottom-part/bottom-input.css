@@ -60,6 +60,7 @@
 }
 
 .input-container:hover:after,
+.input-container:focus:after,
 .input-container:has(input:focus)::after {
     opacity: 1;
     overflow: hidden;
@@ -124,6 +125,7 @@ input::placeholder {
 
 /* On Focus change color  */
 
+.input-container:focus-within .text-inside-input,
 .input-container:focus-within .category-name,
 .input-container:focus-within .to-do-input,
 .input-container:focus-within .to-do-input::placeholder {
@@ -140,7 +142,7 @@ input::placeholder {
 }
 
 /* On Hover change color  */
-
+.input-container:hover .text-inside-input,
 .input-container:hover .category-name,
 .input-container:hover .to-do-input,
 .input-container:hover .to-do-input::placeholder {
@@ -160,4 +162,24 @@ input::placeholder {
 
 .input-container:hover .input-box-icon-container {
     filter: none;
+}
+
+.text-inside-input {
+    font-size: 16px;
+    text-shadow: var(--my-text-shadow) !important;
+}
+
+.cur-year {
+    font-family: var(--my-font-family) !important;
+    font-size: 18px !important;
+
+}
+
+.arrowUp,
+.arrowDown {
+    margin-left: 10px !important;
+}
+
+.numInputWrapper {
+    width: 3.5em !important;
 }

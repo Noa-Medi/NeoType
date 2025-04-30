@@ -24,13 +24,22 @@
 
     --my-basic-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
     --my-icons-shadow: 0 0 .2em var(--color-accent);
+
+    --my-font-family: Tilt Neon;
 }
+
+
 
 html,
 body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: var(--my-font-family);
+    color: var(--color-on-surface);
+    font-size: 19px;
+    text-shadow: var(--my-text-shadow);
+    /* text-shadow: 0 0 1em var(--color-accent), 0 0 .7em var(--color-accent), 0 0 .2em var(--color-accent); */
 }
 
 body {
