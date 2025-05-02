@@ -1,22 +1,23 @@
 import { sidebarCategoriesRender, categoryClickEvent, newList } from "./sidebar.js";
 import { todoPageRender } from './todoPage.js';
 import { hashDecoder } from './component/hashDecoder.js';
-import { todoCategoryFinder } from './categories.js';
+import { categoryFinder } from './categories.js';
+import { getCategoryName } from "./component/getCategoryName.js";
 
 const runApp = () => {
-    const hashLocation = hashDecoder(window.location.hash);
+    const hashLocation = getCategoryName()
+
+    if (hashLocation && categoryFinder({ hashLocation: hashLocation })) {
+        todoPageRender()
+    } else {
+        todoPageRender('My Day')
+    }
 
     sidebarCategoriesRender()
 
     categoryClickEvent()
 
-    if (hashLocation && todoCategoryFinder(hashLocation)) {
-        // console.log(`hashlocation : ${hashLocation} , todocategoryFinder : ${todoCategoryFinder(hashLocation)}`)
-        todoPageRender(hashLocation)
-    } else {
-        // console.log(`hashlocation : ${hashLocation} , todocategoryFinder : ${todoCategoryFinder(hashLocation)}`)
-        todoPageRender('My Day')
-    }
+
 
     newList()
 

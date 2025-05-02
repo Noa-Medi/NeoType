@@ -80,6 +80,7 @@
     gap: 0.5em;
     padding: 0.5em;
     box-sizing: border-box;
+    /* transition: opacity 1s ease-in-out; */
 }
 
 .to-do-flex-left {
@@ -89,7 +90,7 @@
     min-width: 0;
     /* THIS FIXES FLEX OVERFLOW */
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .check-box-icon-container {
@@ -99,15 +100,20 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 1.1em;
     width: 2em;
     filter: drop-shadow(var(--my-icons-shadow));
     padding-top: .1em;
+    flex-grow: 0;
+    align-self: stretch;
 
 }
 
 .check-box-icon {
+    max-height: 100%;
+
     width: 1em;
+    object-fit: cover;
     filter: drop-shadow(var(--my-icons-shadow));
 }
 
@@ -149,6 +155,7 @@
 }
 
 .completed-container {
+    cursor: pointer;
     height: 1em;
     width: 4.5em;
     border: var(--my-border);
@@ -158,6 +165,17 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.completed-container.collapse .completed-arrow-icon {
+    transform: rotate(-90deg);
+    /* transition: transform 0.3s ease; */
+}
+
+.completed-container.expand .completed-arrow-icon {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
 
 .arrow-icon-container {
     padding-top: .1em;

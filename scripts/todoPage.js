@@ -1,23 +1,26 @@
 import {
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, todoCategoryFinder, todoFinder
+    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, todoFinder
 } from './categories.js';
-import { setupBottomPart } from './bottomBar.js'
+import { sidebarCategoriesRender } from "./sidebar.js";
+import { setupBottomPart } from './bottomBar.js';
 import { hashDecoder } from './component/hashDecoder.js';
+import { getCategoryName } from './component/getCategoryName.js';
 
 
-export function todoPageRender(categoryName) {
+export function todoPageRender(categoryName = getCategoryName()) {
 
     const runApp = () => {
         // console.log(categoryName);
-        let hashLocation = hashDecoder(window.location.hash);
+        let hashLocation = getCategoryName()
         if (categoryName !== hashLocation) {
             window.location.hash = categoryName;
         }
-        titleText(categoryName);
+        titleText();
         titleDate();
-        todosRender(categoryName);
-        todosClickHandler(categoryName);
-        setupBottomPart(categoryName);
+        todosRender();
+        todosClickHandler();
+        setupBottomPart();
+        sidebarCategoriesRender()
     };
 
     if (document.readyState === 'loading') {
@@ -28,40 +31,51 @@ export function todoPageRender(categoryName) {
 
 }
 
-function todosClickHandler(categoryName) {
+function todosClickHandler() {
     const todosListContainer = document.querySelector('.to-do-list-container');
 
-    todosListContainer.addEventListener('click', (event) => {
-        const checkbox = event.target.closest('.check-box-icon-container');
-        if (!checkbox) return;
+    // Remove all previous listeners
+    const newContainer = todosListContainer.cloneNode(true);
+    todosListContainer.parentNode.replaceChild(newContainer, todosListContainer);
 
-        const todoContainer = checkbox.closest('.to-do-container');
-        const todoId = todoContainer.dataset.todoId;
-        const todo = todoFinder(categoryName, todoId);
-        if (!todo) return;
-        todo.isCompleted = !todo.isCompleted;
-        todosRender(categoryName);
+    newContainer.addEventListener('click', (event) => {
+        todoCheckboxClickHandler(event);
+        completeContainerClickHandler(event);
+
     });
+}
+function completeContainerClickHandler(event) {
+    const categoryName = getCategoryName();
+    const completedContainer = event.target.closest('.completed-container');
+    if (!completedContainer) return;
 
-    // const iconContainerElems = document.querySelectorAll('.check-box-icon-container');
-    // iconContainerElems.forEach((element) => {
-    //     element.addEventListener('click', (event) => {
-    //         let todoId = element.closest('.to-do-container').dataset.todoId;
-    //         let todo = todoFinder(categoryName, todoId);
-    //         console.log(todo.isCompleted);
-    //         todo.isCompleted = !todo.isCompleted
-    //         todoPageRender(categoryName);
+    const category = categoryFinder({ categoryName: categoryName });
+    category.isCompletedCollapsed = !category.isCompletedCollapsed;
+    console.log(category.isCompletedCollapsed)
+    todosRender()
 
-    //     });
-    // });
+
+}
+function todoCheckboxClickHandler(event) {
+    const categoryName = getCategoryName();
+    const checkbox = event.target.closest('.check-box-icon-container');
+    if (!checkbox) return;
+
+    const todoContainer = checkbox.closest('.to-do-container');
+    const todoId = todoContainer.dataset.todoId;
+    const todo = todoFinder(categoryName, todoId);
+    if (!todo) return;
+
+    todo.isCompleted = !todo.isCompleted;
+    todosRender(categoryName);
 }
 
 
-
-function titleText(categoryName) {
+function titleText() {
+    const categoryName = getCategoryName();
     const titleTextElem = document.querySelector('.title-text');
     let category;
-    category = todoCategoryFinder(categoryName);
+    category = categoryFinder({ categoryName: categoryName });
     if (category) {
         titleTextElem.innerText = category.name;
     }
@@ -73,7 +87,8 @@ function titleDate() {
     titleDateElem.innerText = date;
 }
 
-export function todosRender(categoryName) {
+export function todosRender() {
+    const categoryName = getCategoryName();
     const uncompletedTodosElem = document.querySelector('.uncompleted-todos');
     const completedTodosElem = document.querySelector('.completed-todos');
     // const completedTodosContainer = document.querySelector('.completed-container')
@@ -81,7 +96,8 @@ export function todosRender(categoryName) {
     const completedHTML = [];
     let isContainerShow = false;
 
-    const category = todoCategoryFinder(categoryName);
+    const category = categoryFinder({ categoryName: categoryName });
+    let isCollapse = category.isCompletedCollapsed;
     // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
     category.todos.forEach((todo) => {
@@ -106,19 +122,21 @@ export function todosRender(categoryName) {
         </div>`;
 
         if (todo.isCompleted) {
-
-            let completedContainer = ` <div class="completed-container">
+            let completedContainer = ` <div class="completed-container ${isCollapse ? 'collapse' : 'expand'}">
                             <div class="arrow-icon-container">
                                 <img src="assets/icons/arrow-down-sign-to-navigate.png" alt=""
                                     class="completed-arrow-icon">
                             </div>
                             <div class="completed-text">Completed</div>
-                        </div>`
+                        </div>`;
+
             if (!isContainerShow) {
                 isContainerShow = true;
                 completedHTML.push(completedContainer);
             }
-            completedHTML.push(todoHTML);
+            if (!isCollapse) {
+                completedHTML.push(todoHTML);
+            }
         } else {
 
             uncompletedHTML.push(todoHTML);

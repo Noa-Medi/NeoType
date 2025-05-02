@@ -1,11 +1,13 @@
 import {
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, todoCategoryFinder
+    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder
 } from './categories.js';
+import { getCategoryName } from './component/getCategoryName.js';
 import { Todo } from './models.js';
 import { todosRender } from './todoPage.js';
+import { hashDecoder } from './component/hashDecoder.js';
 
 
-export function setupBottomPart(categoryName) {
+export function setupBottomPart() {
     const addButton = document.querySelector('.to-do-add-button-container');
     const input = document.getElementById('real-input');
     const datePicker = document.querySelector('.calendar-picker-js '); // example selector
@@ -13,22 +15,25 @@ export function setupBottomPart(categoryName) {
     const categoryPicker = document.querySelector('.category-inputer');
 
 
+
     let selectedDate = null;
     let selectedReminder = null;
     let selectedCategory = null;
 
-    document.addEventListener('DOMContentLoaded', () => {
 
-        setupDatePicker(datePicker, (date) => selectedDate = date);
-        setupReminder(reminderBtn, (reminder) => selectedReminder = reminder);
-        setupCategoryPicker(categoryPicker, (category) => selectedCategory = category)
 
-        setupAddTaskHandler(categoryName, addButton, input, () => selectedDate, () => selectedReminder);
-    });
+    setupDatePicker(datePicker, (date) => selectedDate = date);
+    setupReminder(reminderBtn, (reminder) => selectedReminder = reminder);
+    setupCategoryPicker(categoryPicker, (category) => selectedCategory = category)
+
+    setupAddTaskHandler(addButton, input, () => selectedDate, () => selectedReminder, () => selectedCategory);
+
 }
 
-function setupAddTaskHandler(categoryName, button, input, getDate, getReminder) {
+function setupAddTaskHandler(button, input, getDate, getReminder, getCategory) {
     button.addEventListener('click', () => {
+        // const categoryName = getCategoryName();
+        // console.log(categoryName)
         const text = input.value.trim();
         if (!text) {
             input.focus();
@@ -37,19 +42,18 @@ function setupAddTaskHandler(categoryName, button, input, getDate, getReminder) 
 
         const date = getDate();
         const reminder = getReminder();
+        const categoryName = getCategory();
         addTask(text, categoryName, date, reminder);
+        console.log(text, categoryName, date, reminder)
 
         input.value = '';
         todosRender(categoryName);
+
     });
 }
 
-function addTask(text, categoryName, date, reminder) {
-    const category = todoCategoryFinder(categoryName);
-    category.addTodo(new Todo(text, undefined, false, date, reminder));
-}
-
 function setupDatePicker(elem, callback) {
+    let pickedDate;
     const calendarPicker = flatpickr("#calendar-picker", {
         // mode: "range",
         dateFormat: "d.m.Y",
@@ -60,11 +64,24 @@ function setupDatePicker(elem, callback) {
 
         onValueUpdate: (dates) => {
             let dayObject = dayjs(dates[0]);
+
+            console.log(dayObject.toISOString())
+
+
             let formattedDay = dayObject.format('dddd, D.MMMM');
             document.querySelector('.calendar-picked-date-text').textContent = formattedDay;
 
+            pickedDate = dayObject.toISOString();
+
+
         }
+
     });
+    if (pickedDate) {
+        return callback(pickedDate)
+    } else {
+        return callback(dayjs().toISOString())
+    }
 
     elem.addEventListener('click', () => {
         const position = getPosition(document.querySelector('.reminder-position-linker'));
@@ -95,6 +112,8 @@ function setupReminder(elem, callback) {
             if (reminderPickedDateElem.textContent.length > 0) {
                 reminderPickedDateElem.style.marginRight = '8px'; // ❗ Correct way
             }
+
+            return callback(dayObject.toISOString());
         }
     });
 
@@ -107,33 +126,12 @@ function setupReminder(elem, callback) {
         fpContainer.style.left = `${position.left - 260}px`;
     });
 }
-function setupCategoryPicker(elem, callback) {
-
-    categoriesgenerator()
-    categoryPopupSetup(elem)
-    onCategoryClickHandler()
-
-
-}
-
-function onCategoryClickHandler() {
-    const categoryElems = document.querySelectorAll('.overley-category-and-icon-container');
-    const categoryNameElem = document.querySelector('.category-name-js');
-    categoryElems.forEach((category) => {
-        category.addEventListener('click', (event) => {
-            let categorynName = event.target.dataset.categoryId;
-            // console.log(categorynName);
-            // categoryNameElem.textContent = event.dataset
-        });
-    });
-
-}
 function categoriesgenerator() {
     const categoriesElem = document.querySelector('.overley-categories-list');
     let categoriesHTML = '';
     let categoiesTooShow = [];
 
-    categoiesTooShow.push(todoCategoryFinder('Tasks'));
+    categoiesTooShow.push(categoryFinder({ categoryName: 'Tasks' }));
     neo_todo_user_made_categories.forEach((category) => {
         categoiesTooShow.push(category);
     })
@@ -171,6 +169,37 @@ function categoryPopupSetup(elem) {
 
     });
 }
+function setupCategoryPicker(elem, callback) {
+    categoriesgenerator();
+    categoryPopupSetup(elem);
+
+    // 👉 Call the callback immediately with default
+    callback('Tasks');
+
+    const overleyElem = document.querySelector('.choose-category-overlay-container');
+    const categoryNameElem = document.querySelector('.category-name-js');
+
+    overleyElem.addEventListener('click', (event) => {
+        const choosedCategory = event.target.closest('.overley-category-and-icon-container');
+        if (!choosedCategory) return;
+
+        let categoryId = choosedCategory.dataset.categoryId;
+        const category = categoryFinder({ categoryId: categoryId });
+
+        categoryNameElem.textContent = category.name;
+        callback(category.name); // 👉 Update selectedCategory
+    });
+}
+
+function addTask(text, categoryName, date, reminder) {
+    const category = categoryFinder({ categoryName: categoryName });
+    console.log(text);
+    console.log(categoryName);
+    console.log(date);
+    console.log(reminder);
+    console.log(category);
+    category.addTodo(new Todo(text, undefined, false, date, reminder));
+}
 function getPosition(element) {
     const rect = element.getBoundingClientRect();
     const pos = {
@@ -180,3 +209,4 @@ function getPosition(element) {
     // console.log(pos)
     return pos
 }
+
