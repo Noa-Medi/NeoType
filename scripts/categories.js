@@ -87,32 +87,55 @@ export let neo_todo_user_made_categories = [
 })
 
 
-export function todoCategoryFinder(categoryName) {
-    let category = null; // Define it first
+export function categoryFinder({ categoryName, categoryId }) {
+    if (categoryName) {
+        let category = null; // Define it first
 
-    neo_todo_pre_made_categories.forEach((cat) => {
-        if (cat.name === categoryName) {
-            category = cat;
-        }
-    });
-
-    if (!category) {
-        neo_todo_user_made_categories.forEach((cat) => {
+        neo_todo_pre_made_categories.forEach((cat) => {
             if (cat.name === categoryName) {
                 category = cat;
             }
         });
-    }
-    if (category) {
-        return category;
-    } else {
-        return null;
-    }
 
+        if (!category) {
+            neo_todo_user_made_categories.forEach((cat) => {
+                if (cat.name === categoryName) {
+                    category = cat;
+                }
+            });
+        }
+        if (category) {
+            return category;
+        } else {
+            return null;
+        }
+
+    } if (categoryId) {
+        let category = null; // Define it first
+
+        neo_todo_pre_made_categories.forEach((cat) => {
+            if (cat.id === categoryId) {
+                category = cat;
+            }
+        });
+
+        if (!category) {
+            neo_todo_user_made_categories.forEach((cat) => {
+                if (cat.id === categoryId) {
+                    category = cat;
+                }
+            });
+        }
+        if (category) {
+            return category;
+        } else {
+            return null;
+        }
+    }
 
 }
 
 export function todoFinder(categoryName, todoId) {
-    const todo = todoCategoryFinder(categoryName).findTodoById(todoId);
+    const todo = categoryFinder({ categoryName }).findTodoById(todoId);
     return todo;
 }

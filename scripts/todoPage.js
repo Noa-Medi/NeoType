@@ -1,11 +1,12 @@
 import {
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, todoCategoryFinder, todoFinder
+    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, todoFinder
 } from './categories.js';
 import { setupBottomPart } from './bottomBar.js'
 import { hashDecoder } from './component/hashDecoder.js';
 
 
 export function todoPageRender(categoryName) {
+
 
     const runApp = () => {
         // console.log(categoryName);
@@ -61,7 +62,7 @@ function todosClickHandler(categoryName) {
 function titleText(categoryName) {
     const titleTextElem = document.querySelector('.title-text');
     let category;
-    category = todoCategoryFinder(categoryName);
+    category = categoryFinder({ categoryName });
     if (category) {
         titleTextElem.innerText = category.name;
     }
@@ -81,7 +82,7 @@ export function todosRender(categoryName) {
     const completedHTML = [];
     let isContainerShow = false;
 
-    const category = todoCategoryFinder(categoryName);
+    const category = categoryFinder({ categoryName });
     // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
     category.todos.forEach((todo) => {
