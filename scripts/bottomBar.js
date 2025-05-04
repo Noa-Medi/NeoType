@@ -1,6 +1,5 @@
 import {
     neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder
 } from './categories.js';
 import { Todo } from './models.js';
 import { todosRender } from './todoPage.js';

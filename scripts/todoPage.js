@@ -1,6 +1,5 @@
 import {
     neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, todoFinder
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, todoFinder
 } from './categories.js';
 import { sidebarCategoriesRender } from "./sidebar.js";
 import { setupBottomPart } from './bottomBar.js';
