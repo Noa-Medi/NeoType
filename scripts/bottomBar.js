@@ -7,6 +7,7 @@ import { todosRender } from './todoPage.js';
 
 export function setupBottomPart(categoryName) {
     let CURRENT_CATEGORY = categoryName;
+    // console.log(CURRENT_CATEGORY)
     let SELECTED_CATEGORY = 'Tasks';
 
     const addButton = document.querySelector('.to-do-add-button-container');
@@ -63,7 +64,7 @@ export function setupBottomPart(categoryName) {
         const targetCategory = ['My Day', 'Important'].includes(CURRENT_CATEGORY)
             ? SELECTED_CATEGORY
             : CURRENT_CATEGORY;
-
+        console.log(text, targetCategory, selectedDate, selectedReminder)
         addTask(text, targetCategory, selectedDate, selectedReminder);
         input.value = '';
         todosRender(CURRENT_CATEGORY);

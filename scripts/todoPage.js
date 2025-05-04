@@ -20,7 +20,7 @@ export function todoPageRender(categoryName = getCategoryName()) {
         titleDate();
         todosRender();
         todosClickHandler();
-        setupBottomPart();
+        setupBottomPart(categoryName);
         sidebarCategoriesRender()
     };
 
@@ -98,6 +98,7 @@ export function todosRender() {
     let isContainerShow = false;
 
     const category = categoryFinder({ categoryName });
+    let isCollapse = category.isCollapse;
     // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
     category.todos.forEach((todo) => {
