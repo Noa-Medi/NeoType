@@ -1,4 +1,7 @@
-TODO: complite and uncomplite the tasks
+flatpicker reminder fix font on hour 
+if user category and (just from pre mades : Tasks ) => no category selector in buttom input
+
+TODO: my day takes just the todays todos
 
 TODO: fix the category chooose in input container
 

@@ -2,9 +2,16 @@ import { sidebarCategoriesRender, categoryClickEvent, newList } from "./sidebar.
 import { todoPageRender } from './todoPage.js';
 import { hashDecoder } from './component/hashDecoder.js';
 import { categoryFinder } from './categories.js';
+import { getCategoryName } from "./component/getCategoryName.js";
 
 const runApp = () => {
-    const hashLocation = hashDecoder(window.location.hash);
+    const hashLocation = getCategoryName()
+
+    if (hashLocation && categoryFinder({ hashLocation: hashLocation })) {
+        todoPageRender()
+    } else {
+        todoPageRender('My Day')
+    }
 
     sidebarCategoriesRender()
 

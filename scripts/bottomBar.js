@@ -1,5 +1,6 @@
 import {
     neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder
+    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder
 } from './categories.js';
 import { Todo } from './models.js';
 import { todosRender } from './todoPage.js';
@@ -215,6 +216,7 @@ function categoriesgenerator() {
     let categoriesHTML = '';
     let categoiesTooShow = [];
 
+    categoiesTooShow.push(categoryFinder({ categoryName: 'Tasks' }));
     categoiesTooShow.push(categoryFinder({ categoryName: 'Tasks' }));
     neo_todo_user_made_categories.forEach((category) => {
         categoiesTooShow.push(category);

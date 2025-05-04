@@ -1,45 +1,12 @@
 import { Todo, Category } from './models.js';
 
-// idGenerator()
+
 
 export let neo_todo_pre_made_categories = [
     {
         categoryName: 'My Day',
         categoryID: 'rmpfdcj',
-        todos: [
-            {
-                text: 'This is the First task',
-                todo_id: '98sd4f9s8df',
-                isCompleted: false,
-                date: null,
-                reminder: null,
-
-            }, {
-                text: 'This is the Second task',
-                todo_id: 'oi23890erfh4',
-                isCompleted: false,
-                date: null,
-                reminder: null,
-            }, {
-                text: 'This is the Third task',
-                todo_id: 'jf983q2yajhf',
-                isCompleted: false,
-                date: null,
-                reminder: null,
-            }, {
-                text: 'This is the Forth task',
-                todo_id: 'ajw983jfwse3',
-                isCompleted: true,
-                date: null,
-                reminder: null,
-            }, {
-                text: 'This is the Fifth task',
-                todo_id: 'ajw983jfasdfewse3',
-                isCompleted: true,
-                date: null,
-                reminder: null,
-            },
-        ],
+        todos: [],
         categoryIcon: '../assets/icons/sun.png',
 
     }, {
@@ -51,7 +18,38 @@ export let neo_todo_pre_made_categories = [
     }, {
         categoryName: 'Tasks',
         categoryID: 'famwsff',
-        todos: [],
+        todos: [{
+            text: 'This is the First task',
+            todo_id: '98sd4f9s8df',
+            isCompleted: false,
+            date: null,
+            reminder: null,
+
+        }, {
+            text: 'This is the Second task',
+            todo_id: 'oi23890erfh4',
+            isCompleted: false,
+            date: null,
+            reminder: null,
+        }, {
+            text: 'This is the Third task',
+            todo_id: 'jf983q2yajhf',
+            isCompleted: false,
+            date: null,
+            reminder: null,
+        }, {
+            text: 'This is the Forth task',
+            todo_id: 'ajw983jfwse3',
+            isCompleted: true,
+            date: null,
+            reminder: null,
+        }, {
+            text: 'This is the Fifth task',
+            todo_id: 'ajw983jfasdfewse3',
+            isCompleted: true,
+            date: null,
+            reminder: null,
+        },],
         categoryIcon: '../assets/icons/home.png',
 
     }
@@ -63,6 +61,11 @@ export let neo_todo_pre_made_categories = [
     });
     return category;
 });
+
+function myDaySetup() {
+    // neo_todo_pre_made_categories.categoryFinder('Tasks').findTodosByDate();
+    // neo_todo_pre_made_categories.categoryFinder('My Day').todos = 
+}
 
 export let neo_todo_user_made_categories = [
     {
