@@ -1,4 +1,6 @@
-flatpicker reminder fix font on hour 
+flatpicker date /reminder and inside fix font on hour 
+
+fix the saving base on german .
 if user category and (just from pre mades : Tasks ) => no category selector in buttom input
 
 TODO: my day takes just the todays todos
@@ -13,3 +15,9 @@ TODO: fix the local storage  for the categories and the todos
 
 
 TODO: hover effect of the New List button 
+
+
+remove the pre made date html on the title :  Monday, 7.April 
+
+
+11/04

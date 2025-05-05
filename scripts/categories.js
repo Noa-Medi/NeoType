@@ -24,31 +24,36 @@ export let neo_todo_pre_made_categories = [
             isCompleted: false,
             date: null,
             reminder: null,
+            isImportant: true,
 
         }, {
             text: 'This is the Second task',
             todo_id: 'oi23890erfh4',
             isCompleted: false,
-            date: null,
+            date: '2025-05-05T07:18:39.986Z',
             reminder: null,
+            isImportant: true,
         }, {
             text: 'This is the Third task',
             todo_id: 'jf983q2yajhf',
             isCompleted: false,
             date: null,
             reminder: null,
+            isImportant: false,
         }, {
             text: 'This is the Forth task',
             todo_id: 'ajw983jfwse3',
             isCompleted: true,
-            date: null,
+            date: '2025-05-05T07:18:39.986Z',
             reminder: null,
+            isImportant: true,
         }, {
             text: 'This is the Fifth task',
             todo_id: 'ajw983jfasdfewse3',
             isCompleted: true,
-            date: null,
+            date: '2025-05-05T07:18:39.986Z',
             reminder: null,
+            isImportant: false,
         },],
         categoryIcon: '../assets/icons/home.png',
 
@@ -56,7 +61,7 @@ export let neo_todo_pre_made_categories = [
 ].map((item) => {
     const category = new Category(item.categoryName, item.categoryIcon);
     item.todos.forEach((todoItem) => {
-        const todo = new Todo(todoItem.text, todoItem.todo_id, todoItem.isCompleted, todoItem.date, todoItem.reminder)
+        const todo = new Todo(todoItem.text, todoItem.todo_id, todoItem.isCompleted, todoItem.date, todoItem.reminder, undefined, todoItem.isImportant)
         category.addTodo(todo);
     });
     return category;
@@ -83,7 +88,7 @@ export let neo_todo_user_made_categories = [
 ].map((item) => {
     const category = new Category(item.categoryName, item.categoryIcon);
     item.todos.forEach((todoItem) => {
-        const todo = new Todo(todoItem.text, todoItem.todo_id, todoItem.isCompleted, todoItem.date, todoItem.reminder)
+        const todo = new Todo(todoItem.text, todoItem.todo_id, todoItem.isCompleted, todoItem.date, todoItem.reminder, undefined, todoItem.isImportant)
         category.addTodo(todo);
     });
     return category;

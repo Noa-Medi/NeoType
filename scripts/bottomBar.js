@@ -3,11 +3,11 @@ import {
 } from './categories.js';
 import { Todo } from './models.js';
 import { todosRender } from './todoPage.js';
+import { getMyDayTodos } from './logic/mydayLogic.js';
 
 
 export function setupBottomPart(categoryName) {
     let CURRENT_CATEGORY = categoryName;
-    // console.log(CURRENT_CATEGORY)
     let SELECTED_CATEGORY = 'Tasks';
 
     const addButton = document.querySelector('.to-do-add-button-container');
@@ -37,7 +37,6 @@ export function setupBottomPart(categoryName) {
             `;
             setupCategoryPicker(CURRENT_CATEGORY, (selectedCategory) => {
                 // This runs when user selects a category
-                console.log('Selected:', selectedCategory);
                 SELECTED_CATEGORY = selectedCategory;
                 // Update your task addition logic here
             });
@@ -60,13 +59,17 @@ export function setupBottomPart(categoryName) {
             input.focus();
             return;
         }
+        // Use selected date or null if none chosen
+        const dateToUse = calendarPickerInstance?.selectedDates[0]
+            ? dayjs(calendarPickerInstance.selectedDates[0]).toISOString()
+            : dayjs().toISOString();
 
         const targetCategory = ['My Day', 'Important'].includes(CURRENT_CATEGORY)
             ? SELECTED_CATEGORY
             : CURRENT_CATEGORY;
-        console.log(text, targetCategory, selectedDate, selectedReminder)
-        addTask(text, targetCategory, selectedDate, selectedReminder);
+        addTask(text, targetCategory, dateToUse, selectedReminder);
         input.value = '';
+        getMyDayTodos()
         todosRender(CURRENT_CATEGORY);
     };
 
@@ -78,64 +81,85 @@ export function setupBottomPart(categoryName) {
 function addTask(text, categoryName, date, reminder) {
     const category = categoryFinder({ categoryName });
     category.addTodo(new Todo(text, undefined, false, date, reminder));
+    console.log(category);
 }
 
+let calendarPickerInstance = null;
 function setupDatePicker(elem, callback) {
-    const calendarPicker = flatpickr("#calendar-picker", {
-        // mode: "range",
+
+    // Destroy previous instance if exists
+    if (calendarPickerInstance) {
+        calendarPickerInstance.destroy();
+    }
+
+    let currentDate = null; // Start with no date selected
+    const today = dayjs().toISOString();
+    calendarPickerInstance = flatpickr("#calendar-picker", {
         dateFormat: "d.m.Y",
-        // enableTime: true,
         clickOpens: false,
         position: 'above',
-
-
+        defaultDate: today,
         onValueUpdate: (dates) => {
-            let dayObject = dayjs(dates[0]);
-            let formattedDay = dayObject.format('dddd, D.MMMM');
-            document.querySelector('.calendar-picked-date-text').textContent = formattedDay;
-
+            const dayObject = dayjs(dates[0]);
+            currentDate = dayObject.toISOString();
+            document.querySelector('.calendar-picked-date-text').textContent =
+                dayObject.format('dddd, D.MMMM');
+            callback(currentDate); // Only fires on actual selection
         }
     });
 
+    // Click handler
     elem.addEventListener('click', () => {
         const position = getPosition(document.querySelector('.reminder-position-linker'));
-        calendarPicker.open();
-
-        const fpContainer = calendarPicker.calendarContainer;
-        fpContainer.style.top = `${position.top - 285}px`;
-        fpContainer.style.left = `${position.left - 260}px`;
-
+        calendarPickerInstance.open();
+        calendarPickerInstance.calendarContainer.style.top = `${position.top - 285}px`;
+        calendarPickerInstance.calendarContainer.style.left = `${position.left - 260}px`;
     });
-    // elem.addEventListener('change', (e) => {
-    //     callback(e.target.value); // or formatted date
-    // });
+
+
 }
+
+let reminderPickerInstance = null;
 function setupReminder(elem, callback) {
+
+    // Destroy previous instance if exists
+    if (reminderPickerInstance) {
+        reminderPickerInstance.destroy();
+    }
+    let currentDate = null;
     const reminderPickedDateElem = document.querySelector('.reminder-picked-date-text');
 
-    const reminderPicker = flatpickr("#reminder-picker", {
+    reminderPickerInstance = flatpickr("#reminder-picker", {
 
         dateFormat: "d.m.Y",
         enableTime: true,
         clickOpens: false,
         position: 'above',
         onValueUpdate: (dates) => {
-            let dayObject = dayjs(dates[0]);
-            let formattedDay = dayObject.format('dddd, D.MMMM HH:mm');
-            reminderPickedDateElem.textContent = formattedDay;
+            const dayObject = dayjs(dates[0]);
+            currentDate = dayObject.toISOString();
+            reminderPickedDateElem.textContent =
+                dayObject.format('dddd, D.MMMM');
             if (reminderPickedDateElem.textContent.length > 0) {
-                reminderPickedDateElem.style.marginRight = '8px'; // ❗ Correct way
+                reminderPickedDateElem.style.marginRight = '8px';
             }
+            callback(currentDate); // Only fires on actual selection
+
+            // let formattedDay = dayObject.format('dddd, D.MMMM HH:mm');
+            // reminderPickedDateElem.textContent = formattedDay;
         }
     });
 
     elem.addEventListener('click', () => {
         const position = getPosition(document.querySelector('.reminder-position-linker'));
-        reminderPicker.open();
+        reminderPickerInstance.open();
+        reminderPickerInstance.calendarContainer.style.top = `${position.top - 320}px`;
+        reminderPickerInstance.calendarContainer.style.left = `${position.left - 260}px`;
 
-        const fpContainer = reminderPicker.calendarContainer;
-        fpContainer.style.top = `${position.top - 320}px`;
-        fpContainer.style.left = `${position.left - 260}px`;
+        // reminderPicker.open();
+        // const fpContainer = reminderPicker.calendarContainer;
+        // fpContainer.style.top = `${position.top - 320}px`;
+        // fpContainer.style.left = `${position.left - 260}px`;
     });
 }
 
@@ -205,7 +229,6 @@ function onCategoryClickHandler() {
     categoryElems.forEach((category) => {
         category.addEventListener('click', (event) => {
             let categorynName = event.target.dataset.categoryId;
-            // console.log(categorynName);
             // categoryNameElem.textContent = event.dataset
         });
     });
@@ -261,6 +284,5 @@ function getPosition(element) {
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
     }
-    // console.log(pos)
     return pos
 }

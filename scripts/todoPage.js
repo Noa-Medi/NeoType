@@ -5,16 +5,22 @@ import { sidebarCategoriesRender } from "./sidebar.js";
 import { setupBottomPart } from './bottomBar.js';
 import { hashDecoder } from './component/hashDecoder.js';
 import { getCategoryName } from './component/getCategoryName.js';
-
+import { getMyDayTodos } from './logic/mydayLogic.js';
+import { getImportantTodos } from './logic/importantLogic.js';
 
 export function todoPageRender(categoryName = getCategoryName()) {
 
 
     const runApp = () => {
-        // console.log(categoryName);
         let hashLocation = getCategoryName()
         if (categoryName !== hashLocation) {
             window.location.hash = categoryName;
+        }
+        if (categoryName === 'My Day') {
+            getMyDayTodos()
+        }
+        if (categoryName === 'Important') {
+            getImportantTodos()
         }
         titleText();
         titleDate();
@@ -52,7 +58,6 @@ function completeContainerClickHandler(event) {
 
     const category = categoryFinder({ categoryName: categoryName });
     category.isCompletedCollapsed = !category.isCompletedCollapsed;
-    console.log(category.isCompletedCollapsed)
     todosRender()
 
 

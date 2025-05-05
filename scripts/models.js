@@ -1,5 +1,5 @@
 import { idGenerator } from "./component/idGenerator.js"
-
+import { toLocalDate } from './component/dateHelper.js';
 
 export class Todo {
     constructor(text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null, timeStamp = Date.now(), isImportant = false) {
@@ -26,6 +26,10 @@ export class Category {
         this.todos.push(todo);
     }
 
+    setTodoList(todolist) {
+        this.todos = todolist;
+    }
+
     removeTodo(todoId) {
         this.todos = this.todos.filter(t => t.todo_id !== todoId);
     }
@@ -34,8 +38,15 @@ export class Category {
         return this.todos.find(t => t.todo_id === todoId);
     }
 
-    findTodosByDate(date) {
-        let todos = this.todos.filter(t => t.date === date)
+    filterTodosByDate(date) {
+        if (!date) return [];
+        date = toLocalDate(date)
+        let todos = this.todos.filter(t => toLocalDate(t.date)?.slice(0, 10) === date?.slice(0, 10))
+        return todos;
+    }
+
+    filterTodosByImportant() {
+        let todos = this.todos.filter(t => t.isImportant === true);
         return todos;
     }
 }
