@@ -197,6 +197,7 @@
 
 
 .numInput {
+    font-family: var(--my-font-family) !important;
     font-size: 22px !important;
     text-shadow: none !important;
     color: var(--color-surface-alt) !important;
@@ -221,7 +222,9 @@
 
 .flatpickr-time-separator {
     padding: 0 8px;
+    font-size: 18px !important;
     color: var(--color-on-surface) !important;
+    text-shadow: var(--my-text-shadow) !important;
 }
 
 

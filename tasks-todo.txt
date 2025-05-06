@@ -3,7 +3,8 @@ flatpicker date /reminder and inside fix font on hour
 fix the saving base on german .
 if user category and (just from pre mades : Tasks ) => no category selector in buttom input
 
-TODO: my day takes just the todays todos
+TODO: fix the local storage  for the categories and the todos
+
 
 TODO: fix the category chooose in input container
 
@@ -11,7 +12,6 @@ TODO: animation of the check box of the todo
 
 TODO: new-list-button-container must to have the click event to push the new category in memory
 
-TODO: fix the local storage  for the categories and the todos
 
 
 TODO: hover effect of the New List button 
@@ -20,4 +20,5 @@ TODO: hover effect of the New List button
 remove the pre made date html on the title :  Monday, 7.April 
 
 
-11/04
+edit and remove the categorys / todos 
+clear choosed date and reminder 
