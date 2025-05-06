@@ -2,7 +2,7 @@ import { idGenerator } from "./component/idGenerator.js"
 import { toLocalDate } from './component/dateHelper.js';
 
 export class Todo {
-    constructor(text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null, timeStamp = Date.now(), isImportant = false) {
+    constructor({ text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null, timeStamp = Date.now(), isImportant = false, catName = null }) {
         this.text = text;
         this.todo_id = todo_id;
         this.isCompleted = isCompleted;
@@ -10,11 +10,12 @@ export class Todo {
         this.reminder = reminder;
         this.timeStamp = timeStamp;
         this.isImportant = isImportant;
+        this.catName = catName;
     }
 }
 
 export class Category {
-    constructor(name, icon, todos = [], isCompletedCollapsed = true) {
+    constructor({ name, icon, todos = [], isCompletedCollapsed = true }) {
         this.name = name;
         this.id = idGenerator();
         this.icon = icon;
@@ -46,7 +47,9 @@ export class Category {
     }
 
     filterTodosByImportant() {
+
         let todos = this.todos.filter(t => t.isImportant === true);
+
         return todos;
     }
 }

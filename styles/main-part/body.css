@@ -168,12 +168,12 @@
 
 .completed-container.collapse .completed-arrow-icon {
     transform: rotate(-90deg);
-    /* transition: transform 0.3s ease; */
+
 }
 
 .completed-container.expand .completed-arrow-icon {
     transform: rotate(0deg);
-    transition: transform 0.3s ease;
+
 }
 
 
@@ -201,4 +201,34 @@
     color: var(--color-comp-on-surface);
     text-shadow: var(--my-completed-text-shadow);
     text-decoration: line-through;
+}
+
+.completed-to-do .to-do-category,
+.completed-to-do .to-do-divider,
+.completed-to-do .to-do-date,
+.completed-to-do .to-do-reminder {
+    color: var(--color-comp-on-surface);
+    text-shadow: var(--my-completed-text-shadow);
+    /* text-decoration: line-through; */
+}
+
+
+.to-do-category {
+    display: inline;
+    font-size: 12px;
+}
+
+.to-do-date {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.to-do-reminder {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.to-do-divider {
+    display: inline-block;
+    font-size: 12px;
 }

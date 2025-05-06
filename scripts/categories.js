@@ -8,12 +8,14 @@ export let neo_todo_pre_made_categories = [
         categoryID: 'rmpfdcj',
         todos: [],
         categoryIcon: '../assets/icons/sun.png',
+        isCompletedCollapsed: true
 
     }, {
         categoryName: 'Important',
         categoryID: 'o9xaf5h',
         todos: [],
         categoryIcon: '../assets/icons/star.png',
+        isCompletedCollapsed: true
 
     }, {
         categoryName: 'Tasks',
@@ -30,7 +32,7 @@ export let neo_todo_pre_made_categories = [
             text: 'This is the Second task',
             todo_id: 'oi23890erfh4',
             isCompleted: false,
-            date: '2025-05-05T07:18:39.986Z',
+            date: '2025-05-06T07:18:39.986Z',
             reminder: null,
             isImportant: true,
         }, {
@@ -44,33 +46,45 @@ export let neo_todo_pre_made_categories = [
             text: 'This is the Forth task',
             todo_id: 'ajw983jfwse3',
             isCompleted: true,
-            date: '2025-05-05T07:18:39.986Z',
+            date: '2025-05-06T07:18:39.986Z',
             reminder: null,
             isImportant: true,
         }, {
             text: 'This is the Fifth task',
             todo_id: 'ajw983jfasdfewse3',
             isCompleted: true,
-            date: '2025-05-05T07:18:39.986Z',
+            date: '2025-05-06T07:18:39.986Z',
             reminder: null,
             isImportant: false,
         },],
         categoryIcon: '../assets/icons/home.png',
+        isCompletedCollapsed: true
 
     }
 ].map((item) => {
-    const category = new Category(item.categoryName, item.categoryIcon);
+    const category = new Category({
+        name: item.categoryName,
+        icon: item.categoryIcon,
+        isCompletedCollapsed: item.isCompletedCollapsed
+    });
     item.todos.forEach((todoItem) => {
-        const todo = new Todo(todoItem.text, todoItem.todo_id, todoItem.isCompleted, todoItem.date, todoItem.reminder, undefined, todoItem.isImportant)
+        const todo = new Todo({
+            text: todoItem.text,
+            todo_id: todoItem.todo_id,
+            isCompleted: todoItem.isCompleted,
+            date: todoItem.date,
+            reminder: todoItem.reminder,
+            timeStamp: undefined,
+            isImportant: todoItem.isImportant,
+            catName: category.name
+        });
         category.addTodo(todo);
+
     });
     return category;
 });
 
-function myDaySetup() {
-    // neo_todo_pre_made_categories.categoryFinder('Tasks').findTodosByDate();
-    // neo_todo_pre_made_categories.categoryFinder('My Day').todos = 
-}
+
 
 export let neo_todo_user_made_categories = [
     {
@@ -86,9 +100,22 @@ export let neo_todo_user_made_categories = [
         categoryIcon: '../assets/icons/hamburger-menu.png'
     },
 ].map((item) => {
-    const category = new Category(item.categoryName, item.categoryIcon);
+    const category = new Category({
+        name: item.categoryName,
+        icon: item.categoryIcon,
+        isCompletedCollapsed: item.isCompletedCollapsed
+    });
     item.todos.forEach((todoItem) => {
-        const todo = new Todo(todoItem.text, todoItem.todo_id, todoItem.isCompleted, todoItem.date, todoItem.reminder, undefined, todoItem.isImportant)
+        const todo = new Todo({
+            text: todoItem.text,
+            todo_id: todoItem.todo_id,
+            isCompleted: todoItem.isCompleted,
+            date: todoItem.date,
+            reminder: todoItem.reminder,
+            timeStamp: undefined,
+            isImportant: todoItem.isImportant,
+            catName: category.name
+        });
         category.addTodo(todo);
     });
     return category;

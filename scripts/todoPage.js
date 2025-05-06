@@ -7,6 +7,7 @@ import { hashDecoder } from './component/hashDecoder.js';
 import { getCategoryName } from './component/getCategoryName.js';
 import { getMyDayTodos } from './logic/mydayLogic.js';
 import { getImportantTodos } from './logic/importantLogic.js';
+import { toFormattedDate } from './component/dateHelper.js';
 
 export function todoPageRender(categoryName = getCategoryName()) {
 
@@ -103,7 +104,29 @@ export function todosRender() {
     let isContainerShow = false;
 
     const category = categoryFinder({ categoryName });
-    let isCollapse = category.isCollapse;
+    let isCollapse = category.isCompletedCollapsed;
+    function categoryChecker(catName) {
+        if (catName === 'My Day' || catName === 'Important') {
+            return true
+        } else {
+            return false
+        }
+    }
+    function isDividerNeeded({ item1, item2 }) {
+        if (item1 && item2) {
+            return `<div class="to-do-divider">&#x2022</div>`
+        } else {
+            return ``
+        }
+    }
+
+    function dateChecker(date) {
+        if (date && category.name !== 'My Day') {
+            return true
+        } else {
+            return false
+        }
+    }
     // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
     category.todos.forEach((todo) => {
@@ -117,7 +140,18 @@ export function todosRender() {
                     <div class="vertical-divider"></div>
                 </div>
                 <div class="to-do-text-container">
-                    <div class="to-do-text">${todo.text}</div>
+                   <div class="to-do-text">${todo.text}</div>
+                    <div class="to-do-description">
+                    ${categoryChecker(category.name) ? ` <div class="to-do-category">${todo.catName}</div>` : ``}
+
+                    ${isDividerNeeded({ item1: categoryChecker(category.name), item2: dateChecker(todo.date) || todo.reminder })}
+
+                    ${dateChecker(todo.date) ? `<div class="to-do-date">${toFormattedDate(todo.date)}</div>` : ``}
+
+                    ${isDividerNeeded({ item1: todo.date, item2: todo.reminder })}
+
+                    ${todo.reminder ? `<div class="to-do-reminder">${toFormattedDate(todo.reminder)}</div>` : ``}
+                    </div>
                 </div>
             </div>
             <div class="to-do-flex-right">

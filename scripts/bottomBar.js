@@ -80,7 +80,13 @@ export function setupBottomPart(categoryName) {
 
 function addTask(text, categoryName, date, reminder) {
     const category = categoryFinder({ categoryName });
-    category.addTodo(new Todo(text, undefined, false, date, reminder));
+    category.addTodo(new Todo({
+        text: text,
+        isCompleted: false,
+        date: date,
+        reminder: reminder,
+        catName: category.name
+    }));
     console.log(category);
 }
 

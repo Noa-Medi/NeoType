@@ -92,7 +92,7 @@ export function newList() {
 
             if (event.key === "Enter" && input.value) {
 
-                let newCategory = new Category(input.value, '../assets/icons/hamburger-menu.png')
+                let newCategory = new Category({ name: input.value, icon: '../assets/icons/hamburger-menu.png' })
                 neo_todo_user_made_categories.push(newCategory)
                 newListElement.classList.remove('new-list-inputer');
                 newListElement.innerHTML = `
