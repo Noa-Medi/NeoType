@@ -39,6 +39,8 @@ export function todoPageRender(categoryName = getCategoryName()) {
 
 }
 
+
+
 function todosClickHandler() {
     const todosListContainer = document.querySelector('.to-do-list-container');
 
@@ -49,20 +51,27 @@ function todosClickHandler() {
     newContainer.addEventListener('click', (event) => {
         todoCheckboxClickHandler(event);
         completeContainerClickHandler(event);
-
+        importantButtonClickHandler(event);
     });
 }
-function completeContainerClickHandler(event) {
+
+function importantButtonClickHandler(event) {
     const categoryName = getCategoryName();
-    const completedContainer = event.target.closest('.completed-container');
-    if (!completedContainer) return;
+    const starButtonElem = event.target.closest('.star-icon-container');
+    if (!starButtonElem) return;
 
-    const category = categoryFinder({ categoryName: categoryName });
-    category.isCompletedCollapsed = !category.isCompletedCollapsed;
-    todosRender()
+    const todoContainer = starButtonElem.closest('.to-do-container');
+    const todoId = todoContainer.dataset.todoId;
+    const todo = todoFinder(categoryName, todoId);
+    if (!todo) return;
 
-
+    todo.isImportant = !todo.isImportant;
+    console.log(todo)
+    getImportantTodos()
+    todosRender(categoryName);
 }
+
+
 function todoCheckboxClickHandler(event) {
     const categoryName = getCategoryName();
     const checkbox = event.target.closest('.check-box-icon-container');
@@ -76,7 +85,17 @@ function todoCheckboxClickHandler(event) {
     todo.isCompleted = !todo.isCompleted;
     todosRender(categoryName);
 }
+function completeContainerClickHandler(event) {
+    const categoryName = getCategoryName();
+    const completedContainer = event.target.closest('.completed-container');
+    if (!completedContainer) return;
 
+    const category = categoryFinder({ categoryName: categoryName });
+    category.isCompletedCollapsed = !category.isCompletedCollapsed;
+    todosRender()
+
+
+}
 
 function titleText() {
     const categoryName = getCategoryName();
@@ -156,7 +175,7 @@ export function todosRender() {
             </div>
             <div class="to-do-flex-right">
                 <div class="star-icon-container">
-                    <img src="assets/icons/star.png" class="star-icon">
+                    <img src="${todo.isImportant ? 'assets/icons/star-filled.png' : 'assets/icons/star.png'}" class="star-icon">
                 </div>
             </div>
         </div>`;
