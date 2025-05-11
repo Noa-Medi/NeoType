@@ -22,55 +22,64 @@
     <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-input.css">
     <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-overley.css">
     <link rel="stylesheet" href="styles/sidebar-input.css">
+    <link rel="stylesheet" href="styles/editbar/editbar.css">
+
+
 
 
 </head>
 
 <body>
-    <nav>
-        <div class="sidebar-container">
-            <div class="sidebar-title-container">
-                <div class="sidebar-title">
-                    <div class="neo-part">Neo</div>
-                    <div class="to-do-part">To-do</div>
-                </div>
-            </div>
-            <div class="sidebar-content">
-                <div class="sidebar-categories">
-                    <div class="sidebar-item ">
-                        <div class="icon-container"><img src="assets/icons/sun.png" alt="" class="category-icon"></div>
-                        <div class="category-name">My Day</div>
-                    </div>
-                    <div class="sidebar-item ">
-                        <div class="icon-container">
-                            <img src="assets/icons/star.png" alt="" class="category-icon">
-                        </div>
-                        <div class="category-name">Important</div>
-                    </div>
-                    <div class="sidebar-item">
-                        <div class="icon-container">
-                            <img src="assets/icons/home.png" alt="" class="category-icon">
-                        </div>
-                        <div class="category-name">Tasks</div>
-                    </div>
 
-
-                </div>
-                <div class="sidebar-new-list-button">
-                    <div class="divider-container">
-                        <div class="divider"></div>
-                    </div>
-                    <div class="sidebar-item-add-btn new-list-button-container">
-                        <div class="icon-container">
-                            <img src="assets/icons/add.png" alt="" class="category-icon">
-                        </div>
-                        <div class="category-name">New list</div>
-                    </div>
-                </div>
-
+    <div class="sidebar-container open">
+        <div class="icon-container sidebar-menu-button">
+            <img src="assets/icons/sidebar.png" class="sidebar-menu-button-icon" alt="">
+        </div>
+        <div class="sidebar-title-container">
+            <div class="sidebar-title">
+                <div class="neo-part">Neo</div>
+                <div class="to-do-part">To-do</div>
             </div>
         </div>
-    </nav>
+        <div class="divider-container">
+            <div class="divider"></div>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-categories">
+                <div class="sidebar-item ">
+                    <div class="icon-container"><img src="assets/icons/sun.png" alt="" class="category-icon"></div>
+                    <div class="category-name">My Day</div>
+                </div>
+                <div class="sidebar-item ">
+                    <div class="icon-container">
+                        <img src="assets/icons/star.png" alt="" class="category-icon">
+                    </div>
+                    <div class="category-name">Important</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon-container">
+                        <img src="assets/icons/home.png" alt="" class="category-icon">
+                    </div>
+                    <div class="category-name">Tasks</div>
+                </div>
+
+
+            </div>
+            <div class="sidebar-new-list-button">
+                <div class="divider-container">
+                    <div class="divider"></div>
+                </div>
+                <div class="sidebar-item-add-btn new-list-button-container">
+                    <div class="icon-container">
+                        <img src="assets/icons/add.png" alt="" class="category-icon">
+                    </div>
+                    <div class="category-name">New list</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <header>
         <div class="title-container">
             <div class="title-text">My Day</div>
@@ -126,7 +135,7 @@
                                 </div>
                                 <div class="input-box-icon-container calendar-picker-js">
                                     <input type="text" id="calendar-picker" style="display: none;" />
-                                    <img src="assets/icons/calendar.png" alt="" class="calender-icon input-box-icon">
+                                    <img src="assets/icons/calendar.png" alt="" class="calendar-icon input-box-icon">
 
                                 </div>
                                 <div class="calendar-picked-date-text text-inside-input"></div>
@@ -146,6 +155,83 @@
         </div>
 
     </main>
+    <div class="editbar-container">
+        <div class="close-editbar-button-container icon-container">
+            <img src="assets/icons/cross.png" alt="" class="close-editbar-button">
+        </div>
+
+        <div class="editbar-main-content">
+
+            <div class="top-part-todo-container borded-container">
+                <div class="checkbox-and-text-content-container">
+                    <div class="todo-checkbox-icon-container icon-container">
+                        <img src="assets/icons/checklist-with-out-check-mark.png" alt="" class="todo-checkbox-icon">
+                    </div>
+                    <div class="todo-text-container">
+                        <input type="text" class="todo-text-content" value="Your todo text here">
+                    </div>
+                </div>
+                <div class=" todo-important-icon-container icon-container"><img src="assets/icons/star.png" alt=""
+                        class="todo-important-icon">
+                </div>
+            </div>
+            <div class="date-information-container borded-container">
+                <div class="calendar-part-container flex-container ">
+                    <div class="calendar-and-text-container flex-left column-1">
+                        <div class="calendar-icon-container icon-container">
+                            <img src="assets/icons/calendar.png" alt="" class="date-icon">
+                        </div>
+                        <div class="date-text-part calendar-part">Sa, 10.mai</div>
+                    </div>
+
+                    <div class="calendar-remove-icon flex-right column-1">
+                        <div class="remove-data-icon-container icon-container">
+                            <img src="assets/icons/cross.png" alt="" class="remove-data-icon">
+                        </div>
+                    </div>
+                </div>
+                <div class="divider-container">
+                    <div class="half-divider"></div>
+                </div>
+                <div class="reminder-part-container flex-container  off">
+                    <div class="reminder-and-text-container flex-left column-2">
+                        <div class="reminder-icon-container icon-container">
+                            <img src="assets/icons/alarm-clock.png" alt="" class="date-icon">
+                        </div>
+                        <div class="date-text-part calendar-part">Remind me</div>
+                    </div>
+                    <div class="reminder-remove-icon flex-right column-2">
+                        <div class="remove-data-icon-container icon-container icon-hidden">
+                            <img src="assets/icons/cross.png" alt="" class="remove-data-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note-part-container borded-container">
+                <div class="note-taxt-content">Add note</div>
+            </div>
+
+        </div>
+
+        <div class="buttom-part-container">
+
+            <div class="divider-container">
+                <div class="divider"></div>
+            </div>
+            <div class="bottom-part-timestamp-container">
+                <div class="timestamp-text">Created 12 minutes ago</div>
+            </div>
+
+            <div class="delete-button-container">
+                <div class="delete-icon-container icon-container">
+                    <img src="assets/icons/garbage-can.png" alt="" class="delete-icon">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
     <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>

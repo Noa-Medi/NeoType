@@ -5,8 +5,74 @@
     left: 0;
     top: 0;
     width: 12em;
+    height: 100%;
     box-shadow: 0 0 12em rgba(0, 0, 0, 0.345);
     z-index: 2;
+}
+
+
+
+.sidebar-menu-button-icon {
+    width: 1.5rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+.sidebar-menu-button {
+    margin: 0em 0 0 0;
+    display: block;
+    position: fixed;
+    top: 1em;
+    left: 110%;
+    z-index: 10;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 100%;
+        height: 100%;
+        bottom: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: translateX(-100%);
+        font-size: 1.3em;
+        /* Hide by default */
+    }
+
+    body.mobile .sidebar-menu-button {
+        margin: 0em 0 0 0;
+        display: block;
+        position: fixed;
+        top: 1em;
+        right: 1em !important;
+        z-index: 10;
+    }
+
+    .sidebar-container.open {
+        transform: translateX(0);
+        /* Show when toggled */
+    }
+
+    .sidebar-title-container {
+        /* background-color: red; */
+        /* height: auto !important; */
+        position: relative;
+    }
+
+    .neo-part {
+        font-size: 3.4em !important;
+    }
+
+    .to-do-part {
+        font-size: 2em !important;
+        padding-left: 1em;
+        margin-bottom: 0em !important;
+    }
+
+    .sidebar-content {
+        padding-top: .4em !important;
+    }
 }
 
 .sidebar-content {

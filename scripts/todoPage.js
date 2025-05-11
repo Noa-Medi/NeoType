@@ -8,6 +8,7 @@ import { getCategoryName } from './component/getCategoryName.js';
 import { getMyDayTodos } from './logic/mydayLogic.js';
 import { getImportantTodos } from './logic/importantLogic.js';
 import { toFormattedDate } from './component/dateHelper.js';
+import { editbarSetup } from "./editbar/editbar.js";
 
 export function todoPageRender(categoryName = getCategoryName()) {
 
@@ -52,7 +53,23 @@ function todosClickHandler() {
         todoCheckboxClickHandler(event);
         completeContainerClickHandler(event);
         importantButtonClickHandler(event);
+        todoClickHandler(event);
     });
+}
+
+function todoClickHandler(event) {
+    const categoryName = getCategoryName();
+    const todoTextContainer = event.target.closest('.to-do-text-container');
+    if (!todoTextContainer) return;
+
+    const todoContainer = todoTextContainer.closest('.to-do-container');
+    const todoId = todoContainer.dataset.todoId;
+    const todo = todoFinder(categoryName, todoId);
+    if (!todo) return;
+
+
+    editbarSetup(todo)
+
 }
 
 function importantButtonClickHandler(event) {

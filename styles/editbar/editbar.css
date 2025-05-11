@@ -1,0 +1,284 @@
+.editbar-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 15em;
+    height: 100vh;
+    background-color: var(--color-surface-alt);
+    box-shadow: 0 0 12em rgba(0, 0, 0, 0.345);
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.editbar-main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 2.9rem;
+}
+
+/* Style for the scrollbar itself */
+.editbar-main-content::-webkit-scrollbar {
+    width: .35em;
+    height: .1em;
+
+    /* Make the scrollbar width wide enough to be visible */
+}
+
+/* Style for the thumb (the draggable part of the scrollbar) */
+.editbar-main-content::-webkit-scrollbar-thumb {
+    background-color: var(--color-on-surface);
+    /* Gray color for the thumb */
+
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+/* Style for the track (background area of the scrollbar) */
+.editbar-main-content::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Light background for the track */
+    border-radius: 10px;
+    /* Optional: rounds the corners */
+}
+
+.editbar-container.show-editbar {
+    pointer-events: auto;
+
+    opacity: 1;
+}
+
+.borded-container {
+    border: var(--my-border);
+    border-radius: var(--my-border-radius);
+    box-shadow: var(--my-box-shadow);
+    margin: 0 .5rem;
+}
+
+.close-editbar-button-container {
+    /* width: 100%; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.0rem;
+
+}
+
+
+.close-editbar-button {
+    width: 0.8rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+
+.top-part-todo-container {
+    margin-top: 4.5rem;
+
+    display: flex;
+
+    flex-direction: row;
+    /* justify-items: start; */
+    /* justify-content: start */
+    /* justify-self: start; */
+    align-content: start;
+    align-self: flex-start;
+    align-items: start;
+    justify-content: space-between;
+    padding: .5rem;
+}
+
+.checkbox-and-text-content-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+.todo-checkbox-icon {
+
+    margin-right: .5rem;
+    /* margin-top: .2rem; */
+    width: 1rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+
+.todo-text-container {
+    /* margin-top: .1rem; */
+    display: inline-block;
+}
+
+.todo-text-content {
+    font-size: 15px;
+    word-wrap: break-word;
+    /* Legacy property */
+    overflow-wrap: break-word;
+    /* Modern standard */
+    word-break: break-word;
+    /* More aggressive line breaking */
+}
+
+.todo-important-icon {
+    margin-left: .5rem;
+    width: 1.1rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+.date-information-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.date-icon {
+    width: 1.1rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+/* .calendar-part-container {
+    margin: .5rem .5rem 0 .5rem;
+} */
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-left {
+
+    display: flex;
+    margin-left: .5rem;
+}
+
+.flex-right {
+    margin-right: .5rem;
+    margin-left: .5rem
+}
+
+.column-1 {
+    margin-top: .5rem;
+}
+
+.column-2 {
+    margin-bottom: .5rem;
+}
+
+.date-text-part {
+    font-size: .8em;
+    margin-left: .5rem;
+}
+
+.reminder-part-container {
+    /* margin: 0 .5rem .5rem .5rem; */
+    display: flex;
+}
+
+.remove-data-icon-container {
+    /* width: 1rem; */
+}
+
+.remove-data-icon {
+    width: .7rem;
+}
+
+.icon-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.off .date-text-part {
+    color: var(--color-comp-on-surface);
+    text-shadow: var(--my-completed-text-shadow);
+    /* text-decoration: line-through; */
+}
+
+.off .date-icon,
+.off .icon-container {
+    filter: brightness(.7) drop-shadow(var(--my-off-icons-shadow));
+}
+
+.off {
+    color: var(--color-comp-on-surface);
+    text-shadow: var(--my-completed-text-shadow);
+}
+
+.note-part-container {
+    margin-top: 2rem;
+}
+
+.note-taxt-content {
+    margin: 0.5rem;
+    min-height: 3rem;
+}
+
+
+.buttom-part-container {
+
+    background-color: var(--color-surface-alt);
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.bottom-part-timestamp-container {
+    position: relative;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+
+
+}
+
+.timestamp-text {
+    margin: .8rem 0;
+    font-size: .8em;
+}
+
+.delete-button-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+
+.delete-icon {
+    margin: .8rem;
+}
+
+.delete-icon {
+    width: 1rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+}
+
+.note-taxt-content {
+    font-size: .8em;
+}
+
+.todo-text-content {
+    border: none;
+    background-color: transparent;
+    color: var(--color-on-surface);
+    font-size: .8em;
+    max-width: 9rem;
+    box-sizing: border-box;
+
+
+}
+
+/* text-shadow: var(--my-text-shadow); */
+
+
+/* .has-inputer {
+    pointer-events: none;
+} */

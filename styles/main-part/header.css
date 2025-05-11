@@ -10,14 +10,16 @@ header {
 }
 
 .title-container {
-    padding: 3em 1em 0 1.5em;
+    padding: 1em 1em 0 1.5em;
 }
 
 .title-text {
+    margin-top: 0.7em;
     font-size: 35px;
 }
 
 .title-date {
     margin-left: .1em;
+    /* margin-bottom: 4em; */
     font-size: 18px;
 }

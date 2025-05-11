@@ -24,6 +24,7 @@
 
     --my-basic-shadow: 0 0 .8em var(--color-accent), 0 0 .5em var(--color-accent), 0 0 .2em var(--color-accent);
     --my-icons-shadow: 0 0 .2em var(--color-accent);
+    --my-off-icons-shadow: 0 0 .2em var(--color-comp-accent);
 
     --my-font-family: Tilt Neon;
 }

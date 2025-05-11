@@ -4,6 +4,7 @@ import { hashDecoder } from './component/hashDecoder.js';
 import { categoryFinder } from './categories.js';
 import { getCategoryName } from "./component/getCategoryName.js";
 
+
 const runApp = () => {
     const hashLocation = getCategoryName()
 
@@ -17,6 +18,7 @@ const runApp = () => {
 
     categoryClickEvent()
 
+
     if (hashLocation && categoryFinder({ categoryName: hashLocation })) {
         todoPageRender(hashLocation)
     } else {
@@ -24,6 +26,8 @@ const runApp = () => {
     }
 
     newList()
+
+
 
 };
 
