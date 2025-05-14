@@ -87,7 +87,7 @@
 }
 
 .to-do-add-button-container:hover .to-do-add-button-icon {
-    filter: brightness(0) saturate(100%) invert(6.5%) sepia(80%) saturate(800%) hue-rotate(265deg);
+    filter: var(--filter-icon-to-background);
 }
 
 

@@ -134,7 +134,7 @@ input::placeholder {
 }
 
 .input-container:focus-within .input-box-icon {
-    filter: brightness(0) saturate(100%) invert(6.5%) sepia(80%) saturate(800%) hue-rotate(265deg);
+    filter: var(--filter-icon-to-background);
 }
 
 .input-container:focus-within .input-box-icon-container {
@@ -157,7 +157,7 @@ input::placeholder {
 }
 
 .input-container:hover .input-box-icon {
-    filter: brightness(0) saturate(100%) invert(6.5%) sepia(80%) saturate(800%) hue-rotate(265deg);
+    filter: var(--filter-icon-to-background);
 }
 
 .input-container:hover .input-box-icon-container {

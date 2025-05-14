@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="styles/main-part/bottom-part/bottom-overley.css">
     <link rel="stylesheet" href="styles/sidebar-input.css">
     <link rel="stylesheet" href="styles/editbar/editbar.css">
+    <link rel="stylesheet" href="styles/editbar/editbar-datePart.css">
+    <link rel="stylesheet" href="styles/editbar/editbar-topPart.css">
+    <link rel="stylesheet" href="styles/editbar/editbar-notePart.css">
+
 
 
 
@@ -167,8 +171,8 @@
                     <div class="todo-checkbox-icon-container icon-container">
                         <img src="assets/icons/checklist-with-out-check-mark.png" alt="" class="todo-checkbox-icon">
                     </div>
-                    <div class="todo-text-container">
-                        <input type="text" class="todo-text-content" value="Your todo text here">
+                    <div class="text-input-container">
+                        <textarea class="todo-text-content" rows="1">Your todo text here</textarea>
                     </div>
                 </div>
                 <div class=" todo-important-icon-container icon-container"><img src="assets/icons/star.png" alt=""
@@ -178,10 +182,11 @@
             <div class="date-information-container borded-container">
                 <div class="calendar-part-container flex-container ">
                     <div class="calendar-and-text-container flex-left column-1">
-                        <div class="calendar-icon-container icon-container">
+                        <div class="calendar-icon-container icon-container .calendar-position-linker">
                             <img src="assets/icons/calendar.png" alt="" class="date-icon">
                         </div>
                         <div class="date-text-part calendar-part">Sa, 10.mai</div>
+                        <input type="text" id="editbar-calendar-picker" style="display: none;">
                     </div>
 
                     <div class="calendar-remove-icon flex-right column-1">
@@ -195,10 +200,11 @@
                 </div>
                 <div class="reminder-part-container flex-container  off">
                     <div class="reminder-and-text-container flex-left column-2">
-                        <div class="reminder-icon-container icon-container">
+                        <div class="reminder-icon-container icon-container .reminder-position-linker">
                             <img src="assets/icons/alarm-clock.png" alt="" class="date-icon">
                         </div>
                         <div class="date-text-part calendar-part">Remind me</div>
+                        <input type="text" id="editbar-reminder-picker" style="display: none;">
                     </div>
                     <div class="reminder-remove-icon flex-right column-2">
                         <div class="remove-data-icon-container icon-container icon-hidden">

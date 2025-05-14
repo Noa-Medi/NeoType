@@ -1,0 +1,147 @@
+.date-information-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--my-border-radius);
+    transition: background-color 0.2s ease;
+}
+
+.date-information-container:hover {
+    background-color: var(--color-accent);
+}
+
+/* Hover effects for calendar part */
+.calendar-part-container:hover .date-icon,
+.calendar-part-container:hover .icon-container,
+.calendar-part-container:hover .date-text-part,
+.date-information-container:hover .calendar-part-container .date-icon,
+.date-information-container:hover .icon-container,
+.date-information-container:hover .calendar-part-container .date-text-part {
+    filter: var(--filter-icon-to-background);
+    color: var(--color-background);
+    text-shadow: none;
+    box-shadow: none;
+}
+
+/* Hover effects for reminder part */
+.reminder-part-container:hover .date-icon,
+.reminder-part-container:hover .icon-container,
+.reminder-part-container:hover .date-text-part,
+.date-information-container:hover .reminder-part-container .date-icon,
+.date-information-container:hover .reminder-part-container .date-text-part {
+    filter: var(--filter-icon-to-background);
+    color: var(--color-background);
+    text-shadow: none;
+}
+
+/* Special hover effects when container has .off class */
+.date-information-container.off:hover {
+    background-color: var(--color-surface-alt);
+}
+
+.date-information-container.off:hover .date-text-part,
+.date-information-container.off:hover .date-icon,
+.date-information-container.off:hover .icon-container {
+    color: var(--color-on-surface);
+    filter: brightness(0.9) drop-shadow(var(--my-icons-shadow));
+}
+
+.calendar-and-text-container {
+    width: 100%;
+}
+
+.reminder-and-text-container {
+    width: 100%;
+}
+
+/* Show remove icon on hover */
+/* .calendar-part-container:hover .remove-data-icon-container:not(.icon-hidden),
+.reminder-part-container:hover .remove-data-icon-container:not(.icon-hidden),
+.date-information-container.off:hover .remove-data-icon-container:not(.icon-hidden) {
+    opacity: 1;
+    pointer-events: auto;
+} */
+
+/* Icon and text styling */
+.date-icon {
+    width: 1.1rem;
+    filter: drop-shadow(var(--my-icons-shadow));
+    transition: filter 0.2s ease, color 0.2s ease;
+}
+
+.date-text-part {
+    font-size: .8em;
+    margin-left: .75rem;
+    transition: color 0.2s ease, filter 0.2s ease;
+}
+
+.remove-data-icon {
+    width: .7rem;
+    transition: opacity 0.2s ease;
+}
+
+.remove-data-icon-container {
+    /* opacity: 0; */
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+/* Existing styles */
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-left {
+    display: flex;
+    margin-left: .8rem;
+}
+
+.flex-right {
+    margin-right: .9rem;
+    margin-left: .5rem
+}
+
+.column-1 {
+    margin-top: .7rem;
+}
+
+.column-2 {
+    margin-bottom: .7rem;
+}
+
+.date-information-container .divider-container {
+    margin: .2rem 0;
+
+}
+
+.icon-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* OFF STATE STYLES */
+.off .date-text-part {
+    color: var(--color-comp-on-surface);
+    text-shadow: var(--my-completed-text-shadow);
+    transition: color 0.2s ease, filter 0.2s ease;
+}
+
+.off .date-icon,
+.off .icon-container {
+    filter: brightness(.7) drop-shadow(var(--my-off-icons-shadow));
+    transition: filter 0.2s ease;
+}
+
+/* OFF STATE HOVER OVERRIDES */
+.off:hover .date-text-part {
+    color: var(--color-on-surface);
+    text-shadow: none;
+}
+
+.off:hover .date-icon,
+.off:hover .icon-container {
+    filter: brightness(0.9) drop-shadow(var(--my-icons-shadow));
+}

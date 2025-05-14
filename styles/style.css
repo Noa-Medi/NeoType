@@ -27,6 +27,8 @@
     --my-off-icons-shadow: 0 0 .2em var(--color-comp-accent);
 
     --my-font-family: Tilt Neon;
+
+    --filter-icon-to-background: brightness(0) saturate(100%) invert(6.5%) sepia(80%) saturate(800%) hue-rotate(265deg);
 }
 
 

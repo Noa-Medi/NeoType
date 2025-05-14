@@ -1,0 +1,144 @@
+.checkbox-and-text-content-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.todo-checkbox-icon {
+    margin-right: 0.5rem;
+    width: 1rem;
+    filter: var(--filter-icon-default);
+    transition: filter 0.2s ease;
+}
+
+.text-input-container {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    overflow: visible;
+    /* Allow shadow overflow */
+    padding: 0.45rem;
+    /* Shadow buffer space */
+    margin: -0.45rem 0 -0.45rem -0.45rem;
+    /* Compensate for padding */
+}
+
+.todo-text-content {
+    font-family: var(--my-font-family);
+    width: calc(100% + 0.6rem);
+    /* Expand into padding */
+    min-height: 1.4em;
+    /* Ensure single line height */
+    border: none;
+    background: transparent;
+    color: var(--color-on-surface);
+    font-size: 0.8em;
+    max-width: calc(9rem + 0.6rem);
+    /* Original + padding */
+    resize: none;
+    overflow-y: hidden;
+    line-height: 1.4;
+    outline: none;
+    text-shadow: var(--my-text-shadow);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    /* Perfect padding with shadow protection */
+    padding: 0.3rem 0.45rem !important;
+    margin: 0;
+    position: relative;
+    left: -0.45rem;
+    text-indent: 0;
+
+    /* Shadow expansion (adjust 0.3rem as needed) */
+    box-shadow:
+        0 0 0 0.3rem transparent,
+        inset 0 0 0 0.3rem transparent;
+}
+
+.todo-important-icon {
+    /* margin-left: 0.5rem; */
+    width: 1.1rem;
+    filter: var(--filter-icon-default);
+    transition: filter 0.2s ease;
+}
+
+.top-part-todo-container {
+    margin-top: 4.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0.5rem;
+    border-radius: var(--my-border-radius);
+    transition:
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
+}
+
+.top-part-todo-container:hover,
+.top-part-todo-container:focus-within {
+    background-color: var(--color-accent);
+    box-shadow: var(--my-focused-box-shadow);
+
+}
+
+.top-part-todo-container:hover .todo-text-content,
+.top-part-todo-container:focus-within .todo-text-content {
+    color: var(--color-background);
+
+}
+
+.top-part-todo-container:hover .todo-checkbox-icon,
+.top-part-todo-container:hover .todo-important-icon,
+.top-part-todo-container:focus-within .todo-checkbox-icon,
+.top-part-todo-container:focus-within .todo-important-icon {
+    filter: var(--filter-icon-to-background);
+}
+
+.text-input-container {
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
+    /* Allows shadow to extend */
+}
+
+.todo-text-content {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 0.8em;
+    max-width: 9rem;
+    box-sizing: border-box;
+    resize: none;
+    overflow-y: hidden;
+    padding: 0;
+    padding-top: 0.3rem;
+    margin: 0;
+    line-height: 1.4;
+    outline: none;
+    transition: color 0.2s ease;
+}
+
+.todo-checkbox-icon-container,
+.todo-important-icon-container {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: var(--my-border-radius);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.todo-checkbox-icon,
+.todo-important-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.todo-checkbox-icon-container:hover,
+.todo-important-icon-container:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
