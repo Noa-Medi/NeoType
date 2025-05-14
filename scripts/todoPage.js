@@ -67,10 +67,15 @@ function todoClickHandler(event) {
     const todo = todoFinder(categoryName, todoId);
     if (!todo) return;
 
+    // Clear any previous editbar state
+    const editbarContainer = document.querySelector('.editbar-container');
+    if (editbarContainer.currentTodo && editbarContainer.currentTodo.todo_id !== todoId) {
+        editbarContainer.classList.remove('show-editbar');
+    }
 
-    editbarSetup(todo)
-
+    editbarSetup(todo);
 }
+
 
 function importantButtonClickHandler(event) {
     const categoryName = getCategoryName();

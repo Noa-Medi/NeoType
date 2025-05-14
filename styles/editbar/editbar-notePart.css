@@ -1,8 +1,61 @@
 .note-part-container {
     margin-top: 2rem;
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    overflow: visible;
+    transition:
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
+
+    /* padding: 0.45rem; */
+    /* margin: -0.45rem 0 -0.45rem -0.45rem; */
 }
 
-.note-taxt-content {
+.note-text-content {
     margin: 0.5rem;
     min-height: 3rem;
+
+    font-family: var(--my-font-family);
+    width: 90%;
+    max-width: 90%;
+    border: none;
+    background-color: transparent;
+    color: var(--color-on-surface);
+    font-size: 0.8em;
+    resize: none;
+    overflow-y: hidden;
+    line-height: 1.4;
+    outline: none;
+    text-shadow: var(--my-text-shadow);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 0.3rem 0.45rem !important;
+    position: relative;
+    /* left: -0.45rem; */
+    text-indent: 0;
+    box-shadow: 0 0 0 0.3rem transparent, inset 0 0 0 0.3rem transparent;
+    box-sizing: border-box;
+    transition: color 0.2s ease-in-out;
+
+}
+
+.note-part-container:hover,
+.note-part-container:focus-within {
+    background-color: var(--color-accent);
+    box-shadow: var(--my-focused-box-shadow);
+
+}
+
+.note-part-container:hover .note-text-content,
+.note-part-container:focus-within .note-text-content {
+    color: var(--color-background);
+
+}
+
+.note-part-container:hover .note-text-content {
+    color: var(--color-background);
+    text-shadow: none;
+    /* background-color: var(--color-accent); */
+
 }

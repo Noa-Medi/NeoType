@@ -1,34 +1,56 @@
 import { topPartSetup } from "./editbar-topPart.js"
 import { datePartSetup } from "./editbar-datePart.js"
 import { notePartSetup } from "./editbar-notePart.js"
+import { cleanupEditbar } from "./editbar-datePart.js";
+
+// Add this at the top of your file
+let currentCloseHandler = null;
 
 export function editbarSetup(todo) {
-    editbarTrigger(todo)
-    bodySizeChanger()
-    setupEditbarParts(todo)
+    const editbarContainer = document.querySelector('.editbar-container');
+
+    // Clear all previous state and event listeners
+    if (editbarContainer.currentTodo) {
+        cleanupEditbar();
+    }
+
+    editbarContainer.currentTodo = todo;
+    editbarTrigger(todo);
+    bodySizeChanger();
+    setupEditbarParts(todo);
 }
+
+cleanupEditbar()
 
 
 function setupEditbarParts(todo) {
-    closeButtonSetup(todo)
-    topPartSetup(todo)
-    datePartSetup(todo)
-    notePartSetup(todo)
-}
+    // Use the current todo from editbar container
+    const editbarContainer = document.querySelector('.editbar-container');
+    const currentTodo = editbarContainer.currentTodo || todo;
 
+    closeButtonSetup(currentTodo);
+    topPartSetup(currentTodo);
+    datePartSetup(currentTodo);
+    notePartSetup(currentTodo);
+}
 
 function closeButtonSetup(todo) {
     const closeButtonElem = document.querySelector('.close-editbar-button');
-    const editbarContainer = document.querySelector('.editbar-container');
 
-    closeButtonElem.addEventListener('click', () => {
-        // editbarContainer.classList.remove('show-editbar');
-        // editbarContainer.dataset.todoId = '';
-        editbarTrigger(todo, false)
-        bodySizeChanger()
-    })
+    // Remove previous listener if exists
+    if (currentCloseHandler) {
+        closeButtonElem.removeEventListener('click', currentCloseHandler);
+    }
+
+    // Create new handler
+    currentCloseHandler = () => {
+        editbarTrigger(todo, false);
+        bodySizeChanger();
+    };
+
+    // Add new listener
+    closeButtonElem.addEventListener('click', currentCloseHandler);
 }
-
 function bodySizeChanger() {
     const editbarElem = document.querySelector('.editbar-container');
     const body = document.querySelector('.main-content-container');
@@ -43,6 +65,9 @@ function bodySizeChanger() {
 function editbarTrigger(todo, isShow) {
     const editbarContainer = document.querySelector('.editbar-container');
 
+    // Store the current todo in the editbar container
+    editbarContainer.currentTodo = todo; // This maintains a direct reference
+
     if (isShow === undefined) {
         if (!editbarContainer.classList.contains('show-editbar')) {
             editbarContainer.classList.add('show-editbar');
@@ -51,7 +76,7 @@ function editbarTrigger(todo, isShow) {
             editbarContainer.classList.remove('show-editbar');
             editbarContainer.dataset.todoId = '';
         } else {
-            editbarContainer.dataset.todoId = todo.todo_id
+            editbarContainer.dataset.todoId = todo.todo_id;
         }
     } else {
         if (isShow) {
@@ -62,5 +87,4 @@ function editbarTrigger(todo, isShow) {
             editbarContainer.dataset.todoId = '';
         }
     }
-
 }

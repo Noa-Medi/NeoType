@@ -26,16 +26,13 @@
 
 .todo-text-content {
     font-family: var(--my-font-family);
-    width: calc(100% + 0.6rem);
-    /* Expand into padding */
+    width: 100%;
     min-height: 1.4em;
-    /* Ensure single line height */
     border: none;
-    background: transparent;
+    background-color: transparent;
     color: var(--color-on-surface);
     font-size: 0.8em;
-    max-width: calc(9rem + 0.6rem);
-    /* Original + padding */
+    max-width: 9rem;
     resize: none;
     overflow-y: hidden;
     line-height: 1.4;
@@ -43,18 +40,14 @@
     text-shadow: var(--my-text-shadow);
     white-space: pre-wrap;
     word-wrap: break-word;
-
-    /* Perfect padding with shadow protection */
     padding: 0.3rem 0.45rem !important;
     margin: 0;
     position: relative;
     left: -0.45rem;
     text-indent: 0;
-
-    /* Shadow expansion (adjust 0.3rem as needed) */
-    box-shadow:
-        0 0 0 0.3rem transparent,
-        inset 0 0 0 0.3rem transparent;
+    box-shadow: 0 0 0 0.3rem transparent, inset 0 0 0 0.3rem transparent;
+    box-sizing: border-box;
+    transition: color 0.2s ease;
 }
 
 .todo-important-icon {
@@ -103,22 +96,7 @@
     /* Allows shadow to extend */
 }
 
-.todo-text-content {
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    font-size: 0.8em;
-    max-width: 9rem;
-    box-sizing: border-box;
-    resize: none;
-    overflow-y: hidden;
-    padding: 0;
-    padding-top: 0.3rem;
-    margin: 0;
-    line-height: 1.4;
-    outline: none;
-    transition: color 0.2s ease;
-}
+
 
 .todo-checkbox-icon-container,
 .todo-important-icon-container {

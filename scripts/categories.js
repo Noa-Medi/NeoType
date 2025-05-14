@@ -27,7 +27,7 @@ export let neo_todo_pre_made_categories = [
             date: null,
             reminder: null,
             isImportant: true,
-            note: 'This is a random note that i jsut added to test the functionality of the the note and my good programing skills ;) \n hoooo ho ho hoh ho hoh hoh oh oh oh oh oh ho hohhhohoh hho ho h oh o ho ho hh oh ho h ho hoh oh h oh oh oho o o ho h'
+            note: '12312312312312312312312123123123123123123123123123123123 '
 
         }, {
             text: 'This is the Second task',

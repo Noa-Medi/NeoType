@@ -1,58 +1,49 @@
 import { todosRender } from "../todoPage.js";
+import { getImportantTodos } from "../logic/importantLogic.js";
+let isTopPartInitialized = false;
 
 export function topPartSetup(todo) {
-    // Initial render
     renderTopPart(todo);
 
-    // Set up event listeners only once
     const topPartContainerElem = document.querySelector('.top-part-todo-container');
-    if (!topPartContainerElem.dataset.initialized) {
-        // Checkbox click handler
-        const checkboxElem = topPartContainerElem.querySelector('.todo-checkbox-icon-container');
-        checkboxElem.addEventListener('click', () => {
+    if (isTopPartInitialized) return;
+
+    topPartContainerElem.addEventListener('click', (event) => {
+        const todo = getCurrentTodo();
+
+        if (event.target.closest('.todo-checkbox-icon-container')) {
             todo.isCompleted = !todo.isCompleted;
             renderTopPart(todo);
             todosRender();
-        });
-
-        // Important icon click handler
-        const importantIconElem = topPartContainerElem.querySelector('.todo-important-icon-container');
-        importantIconElem.addEventListener('click', () => {
+        }
+        else if (event.target.closest('.todo-important-icon-container')) {
             todo.isImportant = !todo.isImportant;
             renderTopPart(todo);
+            getImportantTodos();
             todosRender();
-        });
+        }
+    });
 
-        // Text input handler
-        const textInput = topPartContainerElem.querySelector('.todo-text-content');
+    const textInput = topPartContainerElem.querySelector('.todo-text-content');
+    textInput.addEventListener('input', () => {
+        textInput.style.height = 'auto';
+        textInput.style.height = (textInput.scrollHeight) + 'px';
+    })
+    textInput.addEventListener('blur', () => {
+        const todo = getCurrentTodo();
+        todo.text = textInput.value.trim();
+        renderTopPart(todo);
+        todosRender();
+    });
 
-        // Auto-resize functionality
-        textInput.addEventListener('input', function () {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-
-        // Save on blur
-        textInput.addEventListener('blur', () => {
-            todo.text = textInput.value.trim();
-            renderTopPart(todo);
-            todosRender();
-        });
-
-        // Save on Enter key (without newline)
-        textInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                textInput.blur();
-                todo.text = textInput.value.trim();
-                renderTopPart(todo);
-                todosRender();
-            }
-        });
-
-        topPartContainerElem.dataset.initialized = true;
-    }
+    isTopPartInitialized = true;
 }
+
+function getCurrentTodo() {
+    const editbarContainer = document.querySelector('.editbar-container');
+    return editbarContainer.currentTodo;
+}
+
 
 function renderTopPart(todo) {
     // Update checkbox

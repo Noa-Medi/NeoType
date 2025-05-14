@@ -82,8 +82,8 @@
 
 
 .off {
-    color: var(--color-comp-on-surface);
-    text-shadow: var(--my-completed-text-shadow);
+    color: var(--color-comp-on-surface) !important;
+    text-shadow: var(--my-completed-text-shadow) !important;
 }
 
 
