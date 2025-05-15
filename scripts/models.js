@@ -28,6 +28,7 @@ export class Category {
     addTodo(todo) {
         this.todos.push(todo);
         saveInLocalStorage();
+
     }
 
     setTodoList(todolist) {
@@ -36,9 +37,9 @@ export class Category {
     }
 
     removeTodo(todoId) {
+        console.log('Before removal:', this.todos.map(t => t.todo_id));
         this.todos = this.todos.filter(t => t.todo_id !== todoId);
-        console.log(`removed todo with id ${todoId}`)
-        console.log(this.todos)
+        console.log('After removal:', this.todos.map(t => t.todo_id));
         saveInLocalStorage();
     }
 

@@ -13,7 +13,7 @@ const runApp = () => {
     loadFromLocalStorage()
 
 
-    if (hashLocation && categoryFinder({ hashLocation: hashLocation })) {
+    if (hashLocation && categoryFinder({ categoryName: hashLocation })) {
         todoPageRender()
     } else {
         todoPageRender('My Day')
@@ -36,7 +36,6 @@ const runApp = () => {
 
 };
 
-console.log(dayjs().toISOString())
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', runApp);

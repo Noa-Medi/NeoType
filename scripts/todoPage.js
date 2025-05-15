@@ -1,5 +1,6 @@
 import {
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, todoFinder
+    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, todoFinder,
+    loadFromLocalStorage
 } from './categories.js';
 import { sidebarCategoriesRender } from "./sidebar.js";
 import { setupBottomPart } from './bottomBar.js';
@@ -9,11 +10,16 @@ import { getMyDayTodos } from './logic/mydayLogic.js';
 import { getImportantTodos } from './logic/importantLogic.js';
 import { toFormattedDate } from './component/dateHelper.js';
 import { editbarSetup } from "./editbar/editbar.js";
+import { topPartSetup } from "./editbar/editbar-topPart.js";
+import { datePartSetup } from "./editbar/editbar-datePart.js";
+import { notePartSetup } from "./editbar/editbar-notePart.js";
+import { bottomPartSetup } from "./editbar/editbar-bottomPart.js";
 
 export function todoPageRender(categoryName = getCategoryName()) {
 
 
     const runApp = () => {
+        loadFromLocalStorage()
         let hashLocation = getCategoryName()
         if (categoryName !== hashLocation) {
             window.location.hash = categoryName;
@@ -73,7 +79,12 @@ function todoClickHandler(event) {
         editbarContainer.classList.remove('show-editbar');
     }
 
-    editbarSetup(todo);
+    const editbar = editbarSetup(todo);
+    // Then modify ALL part setups to receive the save handler:
+    // topPartSetup(todo, editbar);
+    // datePartSetup(todo, editbar);
+    // notePartSetup(todo, editbar);
+    // bottomPartSetup(todo, editbar);
 }
 
 
@@ -88,7 +99,6 @@ function importantButtonClickHandler(event) {
     if (!todo) return;
 
     todo.isImportant = !todo.isImportant;
-    console.log(todo)
     getImportantTodos()
     todosRender(categoryName);
 }
@@ -136,6 +146,7 @@ function titleDate() {
 }
 
 export function todosRender() {
+
     const categoryName = getCategoryName();
     const uncompletedTodosElem = document.querySelector('.uncompleted-todos');
     const completedTodosElem = document.querySelector('.completed-todos');
@@ -177,7 +188,7 @@ export function todosRender() {
     }
     // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
-
+    console.log(`todos when rendering:`, category.todos);
     category.todos.forEach((todo) => {
         const todoHTML = `
         <div class="to-do-container ${todo.isCompleted ? 'completed-to-do' : ''}" data-todo-id="${todo.todo_id}">

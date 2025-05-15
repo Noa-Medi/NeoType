@@ -1,242 +1,202 @@
 import { Todo, Category } from './models.js';
+import { idGenerator } from './component/idGenerator.js';
 
 export let neo_todo_pre_made_categories = [];
 export let neo_todo_user_made_categories = [];
 
 export function loadFromLocalStorage() {
-    // Helper function to revive a category
+    // Helper to revive Todo instances
+    const reviveTodo = (todoData) => {
+        return new Todo({
+            text: todoData.text,
+            todo_id: todoData.todo_id || idGenerator(),
+            isCompleted: todoData.isCompleted || false,
+            date: todoData.date || null,
+            reminder: todoData.reminder || null,
+            timeStamp: todoData.timeStamp || new Date().toISOString(),
+            isImportant: todoData.isImportant || false,
+            catName: todoData.catName,
+            note: todoData.note || ''
+        });
+    };
+
+    // Helper to revive Category instances
     const reviveCategory = (catData) => {
         const category = new Category({
-            name: catData.name,
-            icon: catData.icon,
-            isCompletedCollapsed: catData.isCompletedCollapsed
+            name: catData.name || catData.categoryName,
+            id: catData.id || catData.categoryID || idGenerator(),
+            icon: catData.icon || catData.categoryIcon,
+            isCompletedCollapsed: catData.isCompletedCollapsed !== undefined
+                ? catData.isCompletedCollapsed
+                : true
         });
 
-        // Revive todos as Todo instances
-        category.todos = catData.todos.map(todoData => new Todo({
-            text: todoData.text,
-            todo_id: todoData.todo_id,
-            isCompleted: todoData.isCompleted,
-            date: todoData.date,
-            reminder: todoData.reminder,
-            timeStamp: todoData.timeStamp,
-            isImportant: todoData.isImportant,
-            catName: category.name,
-            note: todoData.note
-        }));
-
+        // Revive todos and add to category
+        if (catData.todos) {
+            category.todos = catData.todos.map(reviveTodo);
+        }
         return category;
     };
 
     // Load pre-made categories
     if (localStorage.getItem('neo_todo_pre_made_categories')) {
-        const savedPreMade = JSON.parse(localStorage.getItem('neo_todo_pre_made_categories'));
-        neo_todo_pre_made_categories = savedPreMade.map(reviveCategory);
+        try {
+            const savedData = JSON.parse(localStorage.getItem('neo_todo_pre_made_categories'));
+            neo_todo_pre_made_categories = savedData.map(reviveCategory);
+        } catch (e) {
+            console.error('Error loading pre-made categories:', e);
+            neo_todo_pre_made_categories = getDefaultPreMadeCategories();
+        }
     } else {
-        // Initial setup (same as your existing code)
-        neo_todo_pre_made_categories = [
-            {
-                categoryName: 'My Day',
-                categoryID: 'rmpfdcj',
-                todos: [],
-                categoryIcon: '../assets/icons/sun.png',
-                isCompletedCollapsed: true
-
-            }, {
-                categoryName: 'Important',
-                categoryID: 'o9xaf5h',
-                todos: [],
-                categoryIcon: '../assets/icons/star.png',
-                isCompletedCollapsed: true
-
-            }, {
-                categoryName: 'Tasks',
-                categoryID: 'famwsff',
-                todos: [{
-                    text: 'This is the First task',
-                    todo_id: '98sd4f9s8df',
-                    isCompleted: false,
-                    date: null,
-                    reminder: null,
-                    isImportant: true,
-                    note: '12312312312312312312312123123123123123123123123123123123 ',
-                    timeStamp: '2025-05-15T06:22:25.674Z'
-
-                }, {
-                    text: 'This is the Second task',
-                    todo_id: 'oi23890erfh4',
-                    isCompleted: false,
-                    date: '2025-05-06T07:18:39.986Z',
-                    reminder: null,
-                    isImportant: true,
-                    timeStamp: '2025-05-15T06:50:58.043Z'
-                }, {
-                    text: 'This is the Third task',
-                    todo_id: 'jf983q2yajhf',
-                    isCompleted: false,
-                    date: null,
-                    reminder: null,
-                    isImportant: false,
-                    timeStamp: '2025-05-15T05:53:58.043Z'
-                }, {
-                    text: 'This is the Forth task',
-                    todo_id: 'ajw983jfwse3',
-                    isCompleted: true,
-                    date: '2025-05-06T07:18:39.986Z',
-                    reminder: null,
-                    isImportant: true,
-                    timeStamp: '2025-05-15T01:53:58.043Z'
-                }, {
-                    text: 'This is the Fifth task',
-                    todo_id: 'ajw983jfasdfewse3',
-                    isCompleted: true,
-                    date: '2025-02-06T07:18:39.986Z',
-                    reminder: null,
-                    isImportant: false,
-                },],
-                categoryIcon: '../assets/icons/home.png',
-                isCompletedCollapsed: true
-
-            }
-        ].map(item => {
-            const category = new Category({
-                name: item.categoryName,
-                categoryID: item.categoryID,
-                icon: item.categoryIcon,
-                todos: item.todos,
-                isCompletedCollapsed: item.isCompletedCollapsed
-            });
-            item.todos.forEach(todoItem => {
-                category.addTodo(new Todo({
-                    text: todoItem.text,
-                    todo_id: todoItem.todo_id,
-                    isCompleted: todoItem.isCompleted,
-                    date: todoItem.date,
-                    reminder: todoItem.reminder,
-                    timeStamp: todoItem.timeStamp,
-                    isImportant: todoItem.isImportant,
-                    catName: category.name,
-                    note: todoItem.note,
-                }));
-            });
-            return category;
-        });
+        neo_todo_pre_made_categories = getDefaultPreMadeCategories();
         localStorage.setItem('neo_todo_pre_made_categories', JSON.stringify(neo_todo_pre_made_categories));
     }
 
     // Load user-made categories
     if (localStorage.getItem('neo_todo_user_made_categories')) {
-        const savedUserMade = JSON.parse(localStorage.getItem('neo_todo_user_made_categories'));
-        neo_todo_user_made_categories = savedUserMade.map(reviveCategory);
+        try {
+            const savedData = JSON.parse(localStorage.getItem('neo_todo_user_made_categories'));
+            neo_todo_user_made_categories = savedData.map(reviveCategory);
+        } catch (e) {
+            console.error('Error loading user-made categories:', e);
+            neo_todo_user_made_categories = getDefaultUserMadeCategories();
+        }
     } else {
-        // Initial setup (same as your existing code)
-        neo_todo_user_made_categories = [
-            {
-                categoryName: 'Goals',
-                categoryID: 'adsfefdcj',
-                todos: [],
-                categoryIcon: '../assets/icons/hamburger-menu.png'
-            }, {
-                categoryName: 'Grocery list',
-                categoryID: 'hergf5h',
-                todos: [],
-                categoryIcon: '../assets/icons/hamburger-menu.png'
-            },
-        ].map(item => {
-            const category = new Category({
-                name: item.categoryName,
-                categoryID: item.categoryID,
-                icon: item.categoryIcon,
-                todos: item.todos,
-                isCompletedCollapsed: item.isCompletedCollapsed
-            });
-            item.todos.forEach(todoItem => {
-                category.addTodo(new Todo({
-                    text: todoItem.text,
-                    todo_id: todoItem.todo_id,
-                    isCompleted: todoItem.isCompleted,
-                    date: todoItem.date,
-                    reminder: todoItem.reminder,
-                    timeStamp: todoItem.timeStamp,
-                    isImportant: todoItem.isImportant,
-                    catName: category.name,
-                    note: todoItem.note,
-                }));
-            });
-            return category;
-        });
+        neo_todo_user_made_categories = getDefaultUserMadeCategories();
         localStorage.setItem('neo_todo_user_made_categories', JSON.stringify(neo_todo_user_made_categories));
     }
+}
 
+function getDefaultPreMadeCategories() {
+    return [
+        {
+            name: 'My Day',
+            icon: '../assets/icons/sun.png',
+            isCompletedCollapsed: true,
+            todos: []
+        },
+        {
+            name: 'Important',
+            icon: '../assets/icons/star.png',
+            isCompletedCollapsed: true,
+            todos: []
+        },
+        {
+            name: 'Tasks',
+            icon: '../assets/icons/home.png',
+            isCompletedCollapsed: true,
+            todos: [
+                {
+                    text: 'This is the First task',
+                    isCompleted: false,
+                    isImportant: true,
+                    note: '12312312312312312312312123123123123123123123123123123123'
+                },
+                {
+                    text: 'This is the Second task',
+                    isCompleted: false,
+                    date: '2025-05-06T07:18:39.986Z',
+                    isImportant: true
+                },
+                {
+                    text: 'This is the Third task',
+                    isCompleted: false,
+                    isImportant: false
+                },
+                {
+                    text: 'This is the Forth task',
+                    isCompleted: true,
+                    date: '2025-05-06T07:18:39.986Z',
+                    isImportant: true
+                },
+                {
+                    text: 'This is the Fifth task',
+                    isCompleted: true,
+                    date: '2025-02-06T07:18:39.986Z'
+                }
+            ].map((todo, index) => ({
+                ...todo,
+                todo_id: `default_task_${index}`,
+                timeStamp: new Date().toISOString(),
+                catName: 'Tasks'
+            }))
+        }
+    ].map(cat => {
+        const category = new Category(cat);
+        category.todos = cat.todos.map(t => new Todo(t));
+        return category;
+    });
+}
 
+function getDefaultUserMadeCategories() {
+    return [
+        {
+            name: 'Goals',
+            icon: '../assets/icons/hamburger-menu.png',
+            todos: []
+        },
+        {
+            name: 'Grocery list',
+            icon: '../assets/icons/hamburger-menu.png',
+            todos: []
+        }
+    ].map(cat => new Category(cat));
 }
 
 export function saveInLocalStorage() {
-    localStorage.setItem('neo_todo_pre_made_categories', JSON.stringify(neo_todo_pre_made_categories));
-    localStorage.setItem('neo_todo_user_made_categories', JSON.stringify(neo_todo_user_made_categories));
-    loadFromLocalStorage()
+    // console.log(neo_todo_user_made_categories);
+    const serializeCategory = (category) => ({
+        ...category,
+        todos: category.todos.map(todo => ({
+            ...todo,
+            // Ensure we only save the data, not methods
+            catName: category.name
+        }))
+    });
+
+    localStorage.setItem(
+        'neo_todo_pre_made_categories',
+        JSON.stringify(neo_todo_pre_made_categories.map(serializeCategory))
+    );
+    localStorage.setItem(
+        'neo_todo_user_made_categories',
+        JSON.stringify(neo_todo_user_made_categories.map(serializeCategory))
+    );
 }
 
-
-
-
-
-
-
 export function categoryFinder({ categoryName, categoryId }) {
+    const allCategories = [...neo_todo_pre_made_categories, ...neo_todo_user_made_categories];
 
+    let category;
     if (categoryName) {
-        let category = null; // Define it first
-
-        neo_todo_pre_made_categories.forEach((cat) => {
-            if (cat.name === categoryName) {
-                category = cat;
-            }
-        });
-
-        if (!category) {
-            neo_todo_user_made_categories.forEach((cat) => {
-                if (cat.name === categoryName) {
-                    category = cat;
-                }
-            });
-        }
-        if (category) {
-            return category;
-        } else {
-            console.log('Category not found:', categoryName);
-
-
-        }
-
-    } if (categoryId) {
-        let category = null; // Define it first
-
-        neo_todo_pre_made_categories.forEach((cat) => {
-            if (cat.id === categoryId) {
-                category = cat;
-            }
-        });
-
-        if (!category) {
-            neo_todo_user_made_categories.forEach((cat) => {
-                if (cat.id === categoryId) {
-                    category = cat;
-                }
-            });
-        }
-        if (category) {
-            return category;
-        } else {
-            console.log('Category not found:', categoryId);
-
-
-        }
+        category = allCategories.find(c => c.name === categoryName);
+    } else if (categoryId) {
+        category = allCategories.find(c => c.id === categoryId);
     }
 
+    if (!category) {
+        console.error('Category not found:', categoryName || categoryId);
+        console.debug('Available categories:', allCategories.map(c => ({
+            name: c.name,
+            id: c.id,
+            todoCount: c.todos.length
+        })));
+        return null;
+    }
+
+    // ✅ Just return the original instance directly
+    return category;
 }
 
 export function todoFinder(categoryName, todoId) {
-    const todo = categoryFinder({ categoryName }).findTodoById(todoId);
-    return todo;
+    const category = categoryFinder({ categoryName });
+    if (!category) return null;
+
+    const todo = category.todos.find(t => t.todo_id === todoId);
+    if (!todo) {
+        console.error(`Todo ${todoId} not found in category ${categoryName}`);
+        return null;
+    }
+
+    return todo instanceof Todo ? todo : new Todo(todo);
 }

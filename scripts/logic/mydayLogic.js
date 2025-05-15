@@ -8,6 +8,7 @@ export function getMyDayTodos() {
         categoryFinder({ categoryName: 'Tasks' }),
         ...neo_todo_user_made_categories,
     ];
+    console.log(allCategoreis);
 
 
     let todoList = [];

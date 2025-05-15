@@ -1,62 +1,48 @@
 import { saveInLocalStorage } from "../categories.js";
 import { todosRender } from "../todoPage.js";
 
-export function notePartSetup(todo) {
+export function notePartSetup(todo, saveHandler) {
 
     const editbar = document.querySelector('.editbar-container');
     const container = editbar.querySelector('.note-part-container');
-    const noteInput = editbar.querySelector('.note-text-content');
 
-    // Always render current todo's note
-    renderNotePart(todo, container, noteInput);
+    // Clone to remove old listeners
+    const newContainer = container.cloneNode(true);
+    container.replaceWith(newContainer);
 
-    // ❗ Remove old listeners to prevent duplicates
-    noteInput.replaceWith(noteInput.cloneNode(true));
-    const newNoteInput = editbar.querySelector('.note-text-content');
+    const noteInput = newContainer.querySelector('.note-text-content');
+    renderNotePart(todo, newContainer, noteInput);
 
-    // Re-render again after clone
-    renderNotePart(todo, container, newNoteInput);
+    let latestNoteText = todo.note || '';
 
-    let latestNoteText = "";
-
-    newNoteInput.addEventListener('keyup', () => {
-        newNoteInput.style.height = 'auto';
-        newNoteInput.style.height = `${newNoteInput.scrollHeight}px`;
-        latestNoteText = newNoteInput.value.trim();
+    noteInput.addEventListener('input', () => {
+        noteInput.style.height = 'auto';
+        noteInput.style.height = noteInput.scrollHeight + 'px';
+        latestNoteText = noteInput.value.trim();
     });
 
-    newNoteInput.addEventListener("blur", () => {
-
+    noteInput.addEventListener('blur', () => {
         if (todo.note !== latestNoteText) {
             todo.note = latestNoteText;
+            saveHandler.saveChanges();
             saveInLocalStorage();
-            renderNotePart(todo, container, newNoteInput);
-
             todosRender();
         }
     });
 
-    newNoteInput.addEventListener('keydown', (e) => {
+    noteInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            newNoteInput.blur();
+            noteInput.blur();
         }
     });
-
-    container.dataset.initialized = true;
 }
-
 
 function renderNotePart(todo, container, noteInput) {
-
     const hasNote = !!todo.note?.trim();
     container.classList.toggle('off', !hasNote);
-
     noteInput.value = hasNote ? todo.note : 'Add note';
-
     noteInput.style.height = 'auto';
-    noteInput.style.height = `${noteInput.scrollHeight}px`;
-
+    noteInput.style.height = noteInput.scrollHeight + 'px';
 }
-
 

@@ -2,45 +2,57 @@ import { categoryFinder } from "../categories.js";
 import { cleanupEditbar } from "./editbar-datePart.js";
 import { bodySizeChanger, editbarTrigger } from "./editbar.js";
 import { todosRender } from "../todoPage.js";
+import { saveInLocalStorage } from "../categories.js";
 
-export function bottomPartSetup(todo) {
+export function bottomPartSetup(todo, saveHandler) {
     const timestampTextElem = document.querySelector('.timestamp-text');
     const deleteIconContainer = document.querySelector('.delete-icon-container');
+
+    // Clone to remove old listeners
+    const newDeleteIcon = deleteIconContainer.cloneNode(true);
+    deleteIconContainer.replaceWith(newDeleteIcon);
+
     renderTimestamp(todo, timestampTextElem);
 
-    deleteIconContainer.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent event bubbling
+    newDeleteIcon.addEventListener('click', async (e) => {
+        e.stopPropagation();
 
-        const category = categoryFinder({ categoryName: todo.catName });
-
-        // 1. Immediately remove from data model
-        category.removeTodo(todo.todo_id);
-        console.log('Todo removed from model', category.todos);
-
-        // 2. Close editbar and clean up
+        // 1. Close editbar first
         editbarTrigger(todo, false);
-        cleanupEditbar();
         bodySizeChanger();
+        cleanupEditbar();
 
-        // 3. Force a fresh render
+        // 2. Remove from model
+        const category = categoryFinder({ categoryName: todo.catName });
+        if (!category) {
+            console.error('Category not found:', todo.catName);
+            return;
+        }
+
+        // 4. Actually remove
+        category.removeTodo(todo.todo_id);
+        console.log('Current category todos:', category.todos);
+
+        // 5. Save updated state AFTER removal
+        saveInLocalStorage();
+
+        // 6. Force complete re-render
+        await new Promise(resolve => setTimeout(resolve, 50));
         todosRender();
-
-        // 4. Optional: Ensure category is still valid
-        console.log('Current category state:', category);
     });
-
 }
-
 function renderTimestamp(todo, timestampTextElem) {
-    console.log(todo);
+    console.log('renderTimestamp called');
+
     const timestamp = todo.timeStamp;
-    console.log(`timestamp : ${timestamp}`);
+
 
     const now = dayjs().toISOString();
     const diff = dayjs(now).diff(dayjs(timestamp), 'seconds');
     if (diff < 60) {
         timestampTextElem.textContent = ` Created ${diff} seconds ago`;
         const interval = setInterval(() => {
+            console.log('interval triggered');
             const now = dayjs().toISOString();
             const diff = dayjs(now).diff(dayjs(timestamp), 'seconds');
             timestampTextElem.textContent = ` Created ${diff} seconds ago`;
@@ -53,6 +65,7 @@ function renderTimestamp(todo, timestampTextElem) {
         const diffInMinutes = Math.floor(diff / 60);
         timestampTextElem.textContent = ` Created ${diffInMinutes} minutes ago`;
         const interval = setInterval(() => {
+            console.log('interval triggered');
             const now = dayjs().toISOString();
             const diff = dayjs(now).diff(dayjs(timestamp), 'seconds');
             const diffInMinutes = Math.floor(diff / 60);
@@ -66,6 +79,7 @@ function renderTimestamp(todo, timestampTextElem) {
         const diffInHours = Math.floor(diff / 60 / 60);
         timestampTextElem.textContent = ` Created ${diffInHours} hours ago`;
         const interval = setInterval(() => {
+            console.log('interval triggered');
             const now = dayjs().toISOString();
             const diff = dayjs(now).diff(dayjs(timestamp), 'seconds');
             const diffInHours = Math.floor(diff / 60 / 60);
@@ -80,23 +94,21 @@ function renderTimestamp(todo, timestampTextElem) {
 
 
     setInterval(() => {
+        console.log('interval triggered');
         const now = dayjs().toISOString();
 
         const diff = dayjs(now).diff(dayjs(timestamp), 'seconds');
-        console.log(`diff : ${diff}`);
 
         if (diff < 60) {
             timestampTextElem.textContent = ` Created ${diff} seconds ago`
             return;
         } else if (diff > 3600) {
             const diffInHours = Math.floor(diff / 60 / 60);
-            console.log(`diffInHours : ${diffInHours}`);
             timestampTextElem.textContent = ` Created ${diffInHours} hours ago`
             return;
 
         }
         const diffInMinutes = Math.floor(diff / 60);
-        console.log(`diffInMinutes : ${diffInMinutes}`);
         timestampTextElem.textContent = ` Created ${diffInMinutes} minutes ago`
     }, 1000);
 }

@@ -4,44 +4,55 @@ import { todosRender } from "../todoPage.js";
 
 let calendarPickerInstance = null;
 let reminderPickerInstance = null;
-export function datePartSetup(todo) {
-    renderDateParts(todo);
 
-    const datePartContainerElem = document.querySelector('.date-information-container');
-    if (!datePartContainerElem.dataset.initialized) {
-        datePartContainerElem.addEventListener('click', (event) => {
-            const calendarAndTextElem = event.target.closest('.calendar-and-text-container');
-            const calendarRemoveElem = event.target.closest('.calendar-remove-icon');
-            const reminderAndTextElem = event.target.closest('.reminder-and-text-container');
-            const reminderRemoveElem = event.target.closest('.reminder-remove-icon');
+export function datePartSetup(todo, saveHandler) {
+    const newContainer = document.querySelector('.date-information-container').cloneNode(true);
+    document.querySelector('.date-information-container').replaceWith(newContainer);
 
-            if (calendarAndTextElem) setupDatePicker(calendarAndTextElem, (date) => {
+    renderDateParts(todo, newContainer);
+
+    newContainer.addEventListener('click', (event) => {
+        const calendarAndTextElem = event.target.closest('.calendar-and-text-container');
+        const calendarRemoveElem = event.target.closest('.calendar-remove-icon');
+        const reminderAndTextElem = event.target.closest('.reminder-and-text-container');
+        const reminderRemoveElem = event.target.closest('.reminder-remove-icon');
+
+        if (calendarAndTextElem) {
+            setupDatePicker(calendarAndTextElem, (date) => {
                 todo.date = date;
+                saveHandler.saveChanges();
                 saveInLocalStorage();
                 renderDateParts(todo);
                 todosRender();
             });
-            if (calendarRemoveElem) {
-                todo.date = null;
-                saveInLocalStorage();
-                renderDateParts(todo);
-                todosRender();
-            }
-            if (reminderAndTextElem) setupReminder(reminderAndTextElem, (reminder) => {
+        }
+
+        if (calendarRemoveElem) {
+            todo.date = null;
+            saveHandler.saveChanges();
+            saveInLocalStorage();
+            renderDateParts(todo);
+            todosRender();
+        }
+
+        if (reminderAndTextElem) {
+            setupReminder(reminderAndTextElem, (reminder) => {
                 todo.reminder = reminder;
+                saveHandler.saveChanges();
                 saveInLocalStorage();
                 renderDateParts(todo);
                 todosRender();
             });
-            if (reminderRemoveElem) {
-                todo.reminder = null;
-                saveInLocalStorage();
-                renderDateParts(todo);
-                todosRender();
-            }
-        });
-        datePartContainerElem.dataset.initialized = true;
-    }
+        }
+
+        if (reminderRemoveElem) {
+            todo.reminder = null;
+            saveHandler.saveChanges();
+            saveInLocalStorage();
+            renderDateParts(todo);
+            todosRender();
+        }
+    });
 }
 
 function renderDateParts(todo) {
@@ -72,18 +83,33 @@ function renderReminderPart(todo) {
 }
 
 export function cleanupEditbar() {
-    calendarPickerInstance?.destroy();
-    calendarPickerInstance = null;
+    if (calendarPickerInstance) {
+        calendarPickerInstance.destroy();
+        calendarPickerInstance = null;
+    }
 
-    reminderPickerInstance?.destroy();
-    reminderPickerInstance = null;
+    if (reminderPickerInstance) {
+        reminderPickerInstance.destroy();
+        reminderPickerInstance = null;
+    }
 
-    document.querySelector('.top-part-todo-container')?.removeAttribute('data-initialized');
-    document.querySelector('.date-information-container')?.removeAttribute('data-initialized');
-    document.querySelector('.note-part-container')?.removeAttribute('data-initialized');
+    const highestIntervalId = setTimeout(() => { }, 0);
+    for (let i = 1; i < highestIntervalId; i++) {
+        clearInterval(i);
+    }
 
-    document.querySelector('.editbar-container').currentTodo = null;
-    console.log('cleaned datepickers');
+    ['top-part-todo-container', 'date-information-container', 'note-part-container'].forEach(className => {
+        const elem = document.querySelector(`.${className}`);
+        if (elem) {
+            elem.removeAttribute('data-initialized');
+        }
+    });
+
+    const editbarContainer = document.querySelector('.editbar-container');
+    if (editbarContainer) {
+        editbarContainer.currentTodo = null;
+        editbarContainer.dataset.todoId = '';
+    }
 }
 
 function setupDatePicker(elem, callback) {
@@ -173,3 +199,4 @@ function getPosition(element) {
         left: rect.left + window.scrollX,
     };
 }
+

@@ -92,7 +92,8 @@ function addTask(text, categoryName, date, reminder, isImportant) {
         catName: category.name,
         isImportant: isImportant
     }));
-    console.log(category);
+
+    (category);
 }
 
 let calendarPickerInstance = null;
