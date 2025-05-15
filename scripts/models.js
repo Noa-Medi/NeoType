@@ -1,8 +1,9 @@
 import { idGenerator } from "./component/idGenerator.js"
 import { toLocalDate } from './component/dateHelper.js';
+import { loadFromLocalStorage, saveInLocalStorage } from './categories.js';
 
 export class Todo {
-    constructor({ text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null, timeStamp = Date.now(), isImportant = false, catName = null, note }) {
+    constructor({ text, todo_id = idGenerator(), isCompleted = false, date = null, reminder = null, timeStamp = dayjs().toISOString(), isImportant = false, catName = null, note }) {
         this.text = text;
         this.todo_id = todo_id;
         this.isCompleted = isCompleted;
@@ -26,14 +27,19 @@ export class Category {
 
     addTodo(todo) {
         this.todos.push(todo);
+        saveInLocalStorage();
     }
 
     setTodoList(todolist) {
         this.todos = todolist;
+        saveInLocalStorage();
     }
 
     removeTodo(todoId) {
         this.todos = this.todos.filter(t => t.todo_id !== todoId);
+        console.log(`removed todo with id ${todoId}`)
+        console.log(this.todos)
+        saveInLocalStorage();
     }
 
 

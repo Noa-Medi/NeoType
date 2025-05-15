@@ -1,3 +1,4 @@
+import { saveInLocalStorage } from "../categories.js";
 import { todosRender } from "../todoPage.js";
 
 export function notePartSetup(todo) {
@@ -28,6 +29,7 @@ export function notePartSetup(todo) {
 
         if (todo.note !== latestNoteText) {
             todo.note = latestNoteText;
+            saveInLocalStorage();
             renderNotePart(todo, container, newNoteInput);
 
             todosRender();

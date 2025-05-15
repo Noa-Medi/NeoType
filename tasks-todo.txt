@@ -1,18 +1,20 @@
 
-TODO: editbar must to code 
-
-TODO: edit and remove the categorys / todos 
-
 TODO: Phone Mode
 
 TODO: clear choosed date and reminder 
 
 TODO: fix the local storage  for the categories and the todos
 
-TODO: animation of the check box of the todo
-
+TODO
 TODO: new-list-button-container must to have the click event to push the new category in memory
 
 TODO: hover effect of the New List button 
 
 TODO:remove the pre made date html on the title :  Monday, 7.April 
+
+
+
+
+
+
+fix saves in local storage

@@ -5,6 +5,7 @@ import { hashDecoder } from './component/hashDecoder.js';
 import { todoPageRender } from './todoPage.js';
 import { getCategoryName } from './component/getCategoryName.js';
 import { categoryFinder } from './categories.js';
+import { saveInLocalStorage } from "./categories.js";
 
 
 
@@ -140,6 +141,7 @@ export function newList() {
 
             const category = newCategory.name;
             window.location.hash = category;
+            saveInLocalStorage()
             sidebarCategoriesRender();
             removeSelectionFromCategory();
             lastCategorySelector();

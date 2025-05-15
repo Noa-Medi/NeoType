@@ -1,5 +1,6 @@
 import { todosRender } from "../todoPage.js";
 import { getImportantTodos } from "../logic/importantLogic.js";
+import { saveInLocalStorage } from "../categories.js";
 let isTopPartInitialized = false;
 
 export function topPartSetup(todo) {
@@ -14,11 +15,13 @@ export function topPartSetup(todo) {
         if (event.target.closest('.todo-checkbox-icon-container')) {
             todo.isCompleted = !todo.isCompleted;
             renderTopPart(todo);
+            saveInLocalStorage();
             todosRender();
         }
         else if (event.target.closest('.todo-important-icon-container')) {
             todo.isImportant = !todo.isImportant;
             renderTopPart(todo);
+            saveInLocalStorage();
             getImportantTodos();
             todosRender();
         }
@@ -32,6 +35,7 @@ export function topPartSetup(todo) {
     textInput.addEventListener('blur', () => {
         const todo = getCurrentTodo();
         todo.text = textInput.value.trim();
+        saveInLocalStorage();
         renderTopPart(todo);
         todosRender();
     });

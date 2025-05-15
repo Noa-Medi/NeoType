@@ -1,3 +1,4 @@
+import { saveInLocalStorage } from "../categories.js";
 import { toFormattedDate } from "../component/dateHelper.js";
 import { todosRender } from "../todoPage.js";
 
@@ -14,18 +15,27 @@ export function datePartSetup(todo) {
             const reminderAndTextElem = event.target.closest('.reminder-and-text-container');
             const reminderRemoveElem = event.target.closest('.reminder-remove-icon');
 
-            if (calendarAndTextElem) setupDatePicker(calendarAndTextElem, (date) => todo.date = date);
+            if (calendarAndTextElem) setupDatePicker(calendarAndTextElem, (date) => {
+                todo.date = date;
+                saveInLocalStorage();
+                renderDateParts(todo);
+                todosRender();
+            });
             if (calendarRemoveElem) {
                 todo.date = null;
+                saveInLocalStorage();
                 renderDateParts(todo);
                 todosRender();
             }
-            if (reminderAndTextElem) {
-                setupReminder(reminderAndTextElem, (reminder) => todo.reminder = reminder);
+            if (reminderAndTextElem) setupReminder(reminderAndTextElem, (reminder) => {
+                todo.reminder = reminder;
+                saveInLocalStorage();
+                renderDateParts(todo);
                 todosRender();
-            }
+            });
             if (reminderRemoveElem) {
                 todo.reminder = null;
+                saveInLocalStorage();
                 renderDateParts(todo);
                 todosRender();
             }
@@ -73,6 +83,7 @@ export function cleanupEditbar() {
     document.querySelector('.note-part-container')?.removeAttribute('data-initialized');
 
     document.querySelector('.editbar-container').currentTodo = null;
+    console.log('cleaned datepickers');
 }
 
 function setupDatePicker(elem, callback) {

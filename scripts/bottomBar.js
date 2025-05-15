@@ -1,9 +1,11 @@
 import {
-    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder
+    neo_todo_pre_made_categories, neo_todo_user_made_categories, categoryFinder, loadFromLocalStorage
+    , saveInLocalStorage
 } from './categories.js';
 import { Todo } from './models.js';
 import { todosRender } from './todoPage.js';
 import { getMyDayTodos } from './logic/mydayLogic.js';
+
 
 
 export function setupBottomPart(categoryName) {
@@ -67,7 +69,9 @@ export function setupBottomPart(categoryName) {
         const targetCategory = ['My Day', 'Important'].includes(CURRENT_CATEGORY)
             ? SELECTED_CATEGORY
             : CURRENT_CATEGORY;
-        addTask(text, targetCategory, dateToUse, selectedReminder);
+
+        const isImportant = CURRENT_CATEGORY === 'Important' ? true : false;
+        addTask(text, targetCategory, dateToUse, selectedReminder, isImportant);
         input.value = '';
         getMyDayTodos()
         todosRender(CURRENT_CATEGORY);
@@ -78,14 +82,15 @@ export function setupBottomPart(categoryName) {
 }
 
 
-function addTask(text, categoryName, date, reminder) {
+function addTask(text, categoryName, date, reminder, isImportant) {
     const category = categoryFinder({ categoryName });
     category.addTodo(new Todo({
         text: text,
         isCompleted: false,
         date: date,
         reminder: reminder,
-        catName: category.name
+        catName: category.name,
+        isImportant: isImportant
     }));
     console.log(category);
 }

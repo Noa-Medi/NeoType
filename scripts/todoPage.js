@@ -143,16 +143,23 @@ export function todosRender() {
     const uncompletedHTML = [];
     const completedHTML = [];
     let isContainerShow = false;
-
+    if (categoryName === 'My Day') {
+        getMyDayTodos()
+    } else if (categoryName === 'Important') {
+        getImportantTodos()
+    }
     const category = categoryFinder({ categoryName });
     let isCollapse = category.isCompletedCollapsed;
     function categoryChecker(catName) {
         if (catName === 'My Day' || catName === 'Important') {
+
+
             return true
         } else {
             return false
         }
     }
+
     function isDividerNeeded({ item1, item2 }) {
         if (item1 && item2) {
             return `<div class="to-do-divider">&#x2022</div>`
@@ -170,6 +177,7 @@ export function todosRender() {
     }
     // let isCompletedNeeded = true;
     category.todos.sort((a, b) => a.isCompleted - b.isCompleted);
+
     category.todos.forEach((todo) => {
         const todoHTML = `
         <div class="to-do-container ${todo.isCompleted ? 'completed-to-do' : ''}" data-todo-id="${todo.todo_id}">

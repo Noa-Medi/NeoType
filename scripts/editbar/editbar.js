@@ -2,6 +2,7 @@ import { topPartSetup } from "./editbar-topPart.js"
 import { datePartSetup } from "./editbar-datePart.js"
 import { notePartSetup } from "./editbar-notePart.js"
 import { cleanupEditbar } from "./editbar-datePart.js";
+import { bottomPartSetup } from "./editbar-bottomPart.js";
 
 // Add this at the top of your file
 let currentCloseHandler = null;
@@ -32,6 +33,7 @@ function setupEditbarParts(todo) {
     topPartSetup(currentTodo);
     datePartSetup(currentTodo);
     notePartSetup(currentTodo);
+    bottomPartSetup(currentTodo);
 }
 
 function closeButtonSetup(todo) {
@@ -51,7 +53,7 @@ function closeButtonSetup(todo) {
     // Add new listener
     closeButtonElem.addEventListener('click', currentCloseHandler);
 }
-function bodySizeChanger() {
+export function bodySizeChanger() {
     const editbarElem = document.querySelector('.editbar-container');
     const body = document.querySelector('.main-content-container');
     if (editbarElem.classList.contains('show-editbar')) {
@@ -60,9 +62,10 @@ function bodySizeChanger() {
     } else {
         body.style.right = '0';
     }
+    console.log('cleaned bodysize');
 }
 
-function editbarTrigger(todo, isShow) {
+export function editbarTrigger(todo, isShow) {
     const editbarContainer = document.querySelector('.editbar-container');
 
     // Store the current todo in the editbar container
@@ -87,4 +90,5 @@ function editbarTrigger(todo, isShow) {
             editbarContainer.dataset.todoId = '';
         }
     }
+    console.log('cleaned editbar');
 }
